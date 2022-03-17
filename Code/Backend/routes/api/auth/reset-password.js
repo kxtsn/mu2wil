@@ -8,7 +8,7 @@ const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
 //user needs to be logged in
-console.log("In auth, reset password")
+console.log("Reset Password")
 router.post('/', isLoggedIn, async function (req, res, next) {
   
         
