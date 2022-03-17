@@ -3,6 +3,7 @@ var router = require('express').Router();
 console.log("In api/auth")
 
 router.use('/login', require('./login'));
+router.use('/reset-password', require('./reset-password'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){
