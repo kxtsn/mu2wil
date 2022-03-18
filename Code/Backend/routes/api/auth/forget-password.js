@@ -53,6 +53,8 @@ router.post('/', async function(req, res, next) {
 
         const mresult = await conn.query(`UPDATE user SET Password = ${pool.escape(hashedpassword)} WHERE Email = ${pool.escape(req.body.email)}`)
             console.log(mresult)
+
+            await conn.query("COMMIT");
             
             res.status(201).send({
                 msg: 'Email has been sent to: ' + req.body.email
