@@ -32,11 +32,11 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             const mresult = await conn.query(`UPDATE user SET Password = ${pool.escape(hashedpassword)} WHERE Email = ${pool.escape(req.body.email)}`)
             console.log(mresult)
             
+            await conn.query("COMMIT");
+            
             res.status(201).send({
                 msg: 'Password reset complete for account: ' + req.body.email
             });
-
-            await conn.query("COMMIT");
 
         } 
         catch (err) {

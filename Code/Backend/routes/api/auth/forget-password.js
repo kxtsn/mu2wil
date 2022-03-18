@@ -8,43 +8,47 @@ const jwt = require('jsonwebtoken');
 const { pool, connection, query }= require('../../../lib/database.js');
 
 //NOT TESTED
-console.log("Forget Password - not tested")
+console.log("Forget Password")
 router.post('/', async function(req, res, next) {
 
+    //Get connection from pool
+    const conn = await connection();
+    console.log(conn)
+
     try{
+        
         var password = generator.generate({
             length: 10,
-            numbers: true,
-            symbols: true
+            numbers: true
         });
 
         console.log(password);
 
         //need create email to try
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'g5mu2wil@gmail.com',
-              pass: 'mu2wilG5'
-            }
-        });
+        // var transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     auth: {
+        //       user: 'g5mu2wil@gmail.com',
+        //       pass: 'mu2wilG5'
+        //     }
+        // });
 
-        var mailOptions = {
-            from: 'g5mu2wil@gmail.com',
-            to: req.body.email,
-            subject: 'Reset Password For MU2WIL <DO NOT SHARE THIS WITH ANYONE>',
-            text: 'hi there, password: ' + password
-        };
+        // var mailOptions = {
+        //     from: 'g5mu2wil@gmail.com',
+        //     to: req.body.email,
+        //     subject: 'Reset Password For MU2WIL <DO NOT SHARE THIS WITH ANYONE>',
+        //     text: 'hi there, password: ' + password
+        // };
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
+        // transporter.sendMail(mailOptions, function(error, info){
+        //     if (error) {
+        //       console.log(error);
+        //     } else {
+        //       console.log('Email sent: ' + info.response);
+        //     }
+        //   });
         
-        const hashedpassword = await bcrypt.hash(req.body.password, 10)
+        const hashedpassword = await bcrypt.hash(password, 10)
         console.log(hashedpassword)
 
         const mresult = await conn.query(`UPDATE user SET Password = ${pool.escape(hashedpassword)} WHERE Email = ${pool.escape(req.body.email)}`)
