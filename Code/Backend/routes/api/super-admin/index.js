@@ -6,6 +6,8 @@ router.use('/create-portal-manager', require('./create-portal-manager'));
 router.use('/create-super-admin', require('./create-super-admin'));
 router.use('/view-all-super-admin', require('./view-all-super-admin'));
 router.use('/view-all-portal-manager', require('./view-all-portal-manager'));
+router.use('/delete-super-admin', require('./delete-super-admin'));
+router.use('/delete-portal-manager', require('./delete-portal-manager'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){
