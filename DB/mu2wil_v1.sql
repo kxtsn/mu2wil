@@ -9,6 +9,16 @@
 --
 
 DROP TABLE IF EXISTS `access_list`;
+DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `super_admin`;
+DROP TABLE IF EXISTS `portal_manager`;
+DROP TABLE IF EXISTS `student_testimonial`;
+DROP TABLE IF EXISTS `employer_testimonial`;
+DROP TABLE IF EXISTS `application`;
+DROP TABLE IF EXISTS `listing`;
+DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `employer`;
+
 CREATE TABLE `access_list` (
   `Role_ID` int NOT NULL AUTO_INCREMENT,
   `Role` varchar(45) NOT NULL,
@@ -26,12 +36,10 @@ INSERT INTO `access_list`(Role) VALUES ('Super Admin'), ('Portal Manager'), ('St
 /*!40000 ALTER TABLE `access_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
 --
 -- Table structure for table `superadmin`
 --
 
-DROP TABLE IF EXISTS `super_admin`;
 CREATE TABLE `super_admin` (
   `Super_Admin_ID` int NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(45) NOT NULL,
@@ -55,7 +63,6 @@ UNLOCK TABLES;
 -- Table structure for table `portal_manager`
 --
 
-DROP TABLE IF EXISTS `portal_manager`;
 CREATE TABLE `portal_manager` (
   `Portal_Manager_ID` int NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(45) NOT NULL,
@@ -75,11 +82,11 @@ INSERT INTO `portal_manager`(First_Name, Last_Name, Email) VALUES ('Kathy','Lim'
 /*!40000 ALTER TABLE `portal_manager` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
 --
 -- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `Student_ID` int NOT NULL AUTO_INCREMENT,
   `Murdoch_Student_ID` char(8) NOT NULL,
@@ -107,7 +114,6 @@ UNLOCK TABLES;
 -- Table structure for table `employer`
 --
 
-DROP TABLE IF EXISTS `employer`;
 CREATE TABLE `employer` (
   `Employer_ID` int NOT NULL AUTO_INCREMENT,
   `First_Name` varchar(45) NOT NULL,
@@ -143,7 +149,6 @@ UNLOCK TABLES;
 -- Table structure for table `listing`
 --
 
-DROP TABLE IF EXISTS `listing`;
 CREATE TABLE `listing` (
   `Listing_ID` int NOT NULL AUTO_INCREMENT,
   `Employer_ID` int NOT NULL,
@@ -175,7 +180,6 @@ UNLOCK TABLES;
 -- Table structure for table `application`
 --
 
-DROP TABLE IF EXISTS `application`;
 CREATE TABLE `application` (
   `Application_ID` int NOT NULL AUTO_INCREMENT,
   `Listing_ID` int NOT NULL,
@@ -205,7 +209,6 @@ UNLOCK TABLES;
 -- Table structure for table `student_testimonial`
 --
 
-DROP TABLE IF EXISTS `student_testimonial`;
 CREATE TABLE `student_testimonial` (
   `Student_Testimonial_ID` int NOT NULL AUTO_INCREMENT,
   `Application_ID` int NOT NULL,
@@ -236,7 +239,6 @@ UNLOCK TABLES;
 -- Table structure for table `employer_testimonial`
 --
 
-DROP TABLE IF EXISTS `employer_testimonial`;
 CREATE TABLE `employer_testimonial` (
   `Employer_Testimonial_ID` int NOT NULL AUTO_INCREMENT,
   `Application_ID` int NOT NULL,
@@ -267,7 +269,6 @@ UNLOCK TABLES;
 -- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `User_ID` int NOT NULL AUTO_INCREMENT,
   `Role_ID` int NOT NULL,
@@ -302,5 +303,12 @@ INSERT INTO `user`(Role_ID, Email, Password, Employer_ID ) VALUES
 (4, 'jasper.t@kopirun.sg', '$2a$12$WH6z4NsRYEhyd.3uCM4TwenoqJ.j5o477blDKv6soalPKVKUAhOuu', 1),(4, 'amanda.o@zeeky.com', '$2a$12$WH6z4NsRYEhyd.3uCM4TwenoqJ.j5o477blDKv6soalPKVKUAhOuu', 2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+CREATE EVENT IF NOT EXISTS update_listing_status
+ON SCHEDULE EVERY 1 DAY 
+STARTS CURRENT_TIMESTAMP
+DO
+  UPDATE listing SET Status = "Closed" WHERE Closing_Date < NOW();
 
 -- Dump completed on 2022-02-23 17:32:36
