@@ -43,21 +43,23 @@ class _BodyState extends State<Body> {
                     child: const Text('Ok'))
               ]));
 
-  Future<String?> attemptLogIn(String username, String password) async {
+  Future<String?> attemptLogIn(String email, String password) async {
     var res = await http.post(
       Uri.parse("$SERVER_IP/api/auth/login"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, String>{
-        "username": username,
+      body: jsonEncode(<String, dynamic>{
+        "email": email,
         "password": password,
       }),
     );
     Map<String, dynamic> responseMap = json.decode(res.body);
+    print("hi in response map");
+    print(responseMap);
     if (res.statusCode == 200) {
       localstorage.setToken(responseMap['token']);
-      localstorage.setRole(responseMap['role']);
+      localstorage.setRole(responseMap['role'].toString());
       return res.body;
     }
     return null;
@@ -75,7 +77,7 @@ class _BodyState extends State<Body> {
               width: 350),
           SizedBox(height: size.height * 0.03),
 
-          //Username
+          //email
           SizedBox(height: size.height * 0.03),
           RoundedInputField(
             widthSize: 400,
@@ -100,6 +102,7 @@ class _BodyState extends State<Body> {
             widthSize: 400,
             text: "LOGIN",
             press: () async {
+              print("hi in login");
               setState(() {
                 _email.isEmpty ? _filledEmail = true : _filledEmail = false;
                 _password.isEmpty
@@ -107,29 +110,23 @@ class _BodyState extends State<Body> {
                     : _filledPassword = false;
               });
 
-              var response = await attemptLogIn(_email, _password);
+              var response =
+                  await attemptLogIn(_email.toString(), _password.toString());
               if (response != null) {
                 var role = "";
-                if (kIsWeb) {
-                  localstorage.setResponesKey(response);
-                } else {
-                  storage.setResponseKey(response);
-                }
+                localstorage.setResponesKey(response);
 
-                if (kIsWeb) {
-                  role = await localstorage.getRole();
-                } else {
-                  role = await storage.getRole();
-                }
-
+                role = await localstorage.getRole();
+                print("Hi role: " + role.toString());
                 if (role == "1") {
-                  Navigator.pushReplacementNamed(context, '/sahomescreen');
+                  print("Hello1");
+                  Navigator.pushReplacementNamed(context, '/admin');
                 } else if (role == "2") {
-                  Navigator.pushReplacementNamed(context, '/pmhomescreen');
+                  Navigator.pushReplacementNamed(context, '/portalManager');
                 } else if (role == "3") {
-                  Navigator.pushReplacementNamed(context, '/shomescreen');
+                  Navigator.pushReplacementNamed(context, '/student');
                 } else if (role == "4") {
-                  Navigator.pushReplacementNamed(context, '/ehomescreen');
+                  Navigator.pushReplacementNamed(context, '/employer');
                 }
               } else {
                 displayDialog(context, "An Error has occurred",
@@ -143,18 +140,18 @@ class _BodyState extends State<Body> {
               children: [
                 GestureDetector(
                     child: const Text(
-                      "Reset Password",
+                      "Forget Password",
                       style: TextStyle(
                         color: primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const ResetPasswordScreen();
-                        },
-                      ));
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) {
+                      //     return const ResetPasswordScreen();
+                      //   },
+                      //));
                     }),
                 const SizedBox(
                   width: 150,
@@ -179,7 +176,6 @@ class _BodyState extends State<Body> {
               mainAxisSize: MainAxisSize.min)
         ],
       ),
-      // ),
     );
   }
 }

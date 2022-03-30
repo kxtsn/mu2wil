@@ -20,12 +20,6 @@ class myApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //return MultiProvider(
-    //providers: [
-    //ChangeNotifierProvider(create: (context) => MenuController()),
-    //],
-    //child: const BaseBuilding(),
-    //);
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Center(child: BaseBuilding()),

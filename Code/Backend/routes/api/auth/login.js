@@ -8,7 +8,7 @@ const { pool, connection, query }= require('../../../lib/database.js');
 console.log("Login")
 router.post('/', async function(req, res, next) {
   console.log("Load Login")
-    console.log(req.body.username + " attempted login");
+    console.log(req.body.email + " attempted login");
     try{
       //Getting database pool connection
       pool.getConnection((err, connection) => {
@@ -36,7 +36,6 @@ router.post('/', async function(req, res, next) {
                   });
                 }
                 //Check password
-                console.log(result[0]['Password'])
                 bcrypt.compare(req.body.password, result[0]['Password'],(bErr, bResult) => {
                   //wrong password
                   if (bErr) {
@@ -59,11 +58,12 @@ router.post('/', async function(req, res, next) {
                           });
                       });
                       } else {
+                        console.log("successfully logged in")
                         connection.commit(function() {
                           connection.release();
                           //success
                           return res.status(200).send({
-                            msg: 'Logged In!', token, email: email, role: role
+                            msg: 'Logged In!', token, role: role
                           });
                       });
                       }

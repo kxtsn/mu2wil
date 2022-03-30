@@ -1,0 +1,262 @@
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names
+
+import 'package:my_app/Fields/header.dart';
+import 'package:my_app/Fields/popUp.dart';
+import 'package:my_app/Fields/roundedButton.dart';
+import 'package:my_app/Fields/roundedInputField.dart';
+import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
+import 'getAdmin.dart';
+import 'package:my_app/util/color.dart';
+import 'package:my_app/util/responsive.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// ignore: must_be_immutable
+class AddAdmin extends StatefulWidget {
+  var admin;
+  AddAdmin({Key? key, this.admin}) : super(key: key);
+  static Future<AdminList>? futureAdminList;
+  @override
+  State<AddAdmin> createState() => _AddAdminListState();
+}
+
+class _AddAdminListState extends State<AddAdmin> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.admin != null) {
+      fillFields();
+    }
+  }
+
+  var firstName, lastName, email;
+
+  final _firstNameTextController = TextEditingController();
+  final _lastNameTextController = TextEditingController();
+  final _emailTextController = TextEditingController();
+
+  bool _filledFirstName = false;
+  bool _filledLastName = false;
+  bool _filledEmail = false;
+  bool _readOnly = false;
+  String text = "Create New Super Admin";
+
+  bool validateField() {
+    bool flag = true;
+    if (firstName == null) {
+      flag = false;
+    }
+    if (lastName == null) {
+      flag = false;
+    }
+    if (email == null) {
+      flag = false;
+    }
+    return flag;
+  }
+
+  void fillFields() {
+    if (widget.admin != null) {
+      _readOnly = true;
+      text = "Update Super Admin Details";
+      _firstNameTextController.text = (widget.admin).firstName.toString();
+      firstName = (widget.admin).firstName.toString();
+      _lastNameTextController.text = (widget.admin).lastName.toString();
+      lastName = (widget.admin).lastName.toString();
+      _emailTextController.text = (widget.admin).email.toString();
+      email = (widget.admin).email.toString();
+    }
+  }
+
+  double changingWidth = 450;
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    if (ResponsiveWidget.isSmallScreen(context)) {
+      changingWidth = 100;
+    }
+    return Container(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(text,
+                                    style:
+                                        const TextStyle(color: darkGreyColor),
+                                    textAlign: TextAlign.left),
+                                SizedBox(height: size.height * 0.01),
+                                RoundedInputField(
+                                  textController: _firstNameTextController,
+                                  widthSize: changingWidth,
+                                  hintText: "First Name",
+                                  onChanged: (value) {
+                                    firstName = value;
+                                  },
+                                  errorText: _filledFirstName
+                                      ? 'field must be filled'
+                                      : null,
+                                ),
+                                RoundedInputField(
+                                  textController: _lastNameTextController,
+                                  widthSize: changingWidth,
+                                  hintText: "Last Name",
+                                  onChanged: (value) {
+                                    lastName = value;
+                                  },
+                                  errorText: _filledLastName
+                                      ? 'field must be filled'
+                                      : null,
+                                ),
+                                RoundedInputField(
+                                  textController: _emailTextController,
+                                  widthSize: changingWidth,
+                                  hintText: "Email",
+                                  readOnly: _readOnly,
+                                  onChanged: (value) {
+                                    email = value;
+                                  },
+                                  errorText: _filledEmail
+                                      ? 'field must be filled'
+                                      : null,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+
+                    //Buttons
+                    Center(
+                      child: Column(
+                        children: [
+                          RoundedButton(
+                              widthSize: changingWidth,
+                              text: "Submit",
+                              color: primaryColor,
+                              press: () async {
+                                setState(() {
+                                  firstName == null
+                                      ? _filledFirstName = true
+                                      : _filledFirstName = false;
+                                  lastName == null
+                                      ? _filledLastName = true
+                                      : _filledLastName = false;
+                                  email == null
+                                      ? _filledEmail = true
+                                      : _filledEmail = false;
+                                });
+                                // fields all filled
+
+                                if (validateField() == true) {
+                                  if (widget.admin == null) {
+                                    // employee dont exist
+                                    if (await commitCheck(email) == false) {
+                                      // submit new admin
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              PopUpWidget(context,
+                                                  icon: Icons.check_circle,
+                                                  iconColor: greenColor,
+                                                  iconSize: 80,
+                                                  title: 'Added New Admin',
+                                                  subTitle:
+                                                      'Admin will be added.',
+                                                  onPressed: () async {
+                                                await commitNew(
+                                                    firstName, lastName, email);
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return ViewAdmin();
+                                                    },
+                                                  ),
+                                                );
+                                              }));
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              PopUpWidget(context,
+                                                  icon: Icons.cancel,
+                                                  iconColor: redColor,
+                                                  iconSize: 80,
+                                                  setConfirmBtn: false,
+                                                  title:
+                                                      'Email exist please enter another email',
+                                                  subTitle:
+                                                      'Email ($email) already exist in the system.',
+                                                  onPressed: () {}));
+                                    }
+                                    // admin exist
+                                  } else {
+                                    // edit employee details
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            PopUpWidget(context,
+                                                icon: Icons.check_circle,
+                                                iconColor: greenColor,
+                                                iconSize: 80,
+                                                title: 'Edit Admin Details',
+                                                subTitle:
+                                                    'Admin will be updated.',
+                                                onPressed: () async {
+                                              await commitUpdate(
+                                                  widget.admin.adminId
+                                                      .toString(),
+                                                  firstName,
+                                                  lastName);
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) {
+                                                    return ViewAdmin();
+                                                  },
+                                                ),
+                                              );
+                                            }));
+                                  }
+                                }
+                                //fields not filled
+                              }),
+                          RoundedButton(
+                            widthSize: changingWidth,
+                            text: "Clear",
+                            color: primaryColor,
+                            press: () {
+                              _firstNameTextController.clear();
+                              _lastNameTextController.clear();
+                              _emailTextController.clear();
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ]))
+        ],
+      ),
+    );
+  }
+}

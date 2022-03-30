@@ -5,7 +5,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Screens/LoginModule/Login/login.dart';
-// import 'Screens/DigitalInventory/home.dart' as DI;
+import 'Screens/SuperAdmin/Admin/view.dart';
+import 'Screens/SuperAdmin/home.dart' as SA;
 // import 'Screens/Sales/home.dart' as Sales;
 // import 'Screens/Warehouse/home.dart' as Warehouse;
 // import 'Screens/Admin/home.dart' as Admin;
@@ -71,9 +72,10 @@ class BaseBuilding extends StatelessWidget {
                       .isAfter(DateTime.now())) {
                     //return HomePage(str.toString(), payload);
                     var role = payload['role'];
-                    //   if (role == "1") {
-                    //     return const Admin.Home();
-                    //   }
+                    print("Role: " + role.toString());
+                    if (role == 1) {
+                      return const SA.Home();
+                    }
                     //   if (role == "2") {
                     //     return const PortalManager.Home();
                     //   }
@@ -96,9 +98,8 @@ class BaseBuilding extends StatelessWidget {
             }),
         routes: {
           '/login': (context) => const Login(),
-          //'/signup': (context) => const SignUp(),
           //'/employer': (context) => const DI.Home(),
-          //'/admin': (context) => const ClientScreen(),
+          '/admin': (context) => const SA.Home(),
           //'/portalManager': (context) => const EmployeeScreen(),
           //'/student': (context) => const Sales.Home(),
         });

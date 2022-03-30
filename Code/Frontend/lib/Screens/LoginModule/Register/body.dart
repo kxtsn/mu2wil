@@ -7,6 +7,8 @@ import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/Util/color.dart';
 
+import 'commitRegister.dart';
+
 class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
   @override
@@ -298,18 +300,19 @@ class _BodyState extends State<Body> {
                             subTitle:
                                 '$companyName will be registered upon confirmation by the school\'s management. \n An email will be sent with an account password alongside the registration.',
                             onPressed: () async {
-                          // registerCompany(
-                          //     companyName,
-                          //     firstName,
-                          //     lastName,
-                          //     contact,
-                          //     telephone,
-                          //     email,
-                          //     address1,
-                          //     address2,
-                          //     postal,
-                          //     country,
-                          //     companyCode);
+                          registerCompany(
+                              companyName.toString(),
+                              firstName.toString(),
+                              lastName.toString(),
+                              contact.toString(),
+                              telephone.toString(),
+                              email.toString(),
+                              website.toString(),
+                              address1.toString(),
+                              address2.toString(),
+                              postal.toString(),
+                              country.toString(),
+                              companyCode.toString());
                           Navigator.push(
                             context,
                             MaterialPageRoute(
