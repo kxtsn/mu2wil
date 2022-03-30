@@ -5,8 +5,8 @@ import 'package:my_app/Fields/popUp.dart';
 import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Fields/roundedInputField.dart';
 import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
+import 'package:my_app/Util/color.dart';
 import 'getAdmin.dart';
-import 'package:my_app/util/color.dart';
 import 'package:my_app/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +74,7 @@ class _AddAdminListState extends State<AddAdmin> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (ResponsiveWidget.isSmallScreen(context)) {
-      changingWidth = 100;
+      changingWidth = 250;
     }
     return Container(
       child: Column(
@@ -84,7 +84,8 @@ class _AddAdminListState extends State<AddAdmin> {
           ),
           Container(
               decoration: BoxDecoration(
-                border: Border.all(),
+                border: Border.all(color: darkGreyColor),
+                borderRadius: const BorderRadius.all(Radius.circular(5.0)),
               ),
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -102,8 +103,7 @@ class _AddAdminListState extends State<AddAdmin> {
                                   height: 10,
                                 ),
                                 Text(text,
-                                    style:
-                                        const TextStyle(color: darkGreyColor),
+                                    style: TextStyle(color: blackColor),
                                     textAlign: TextAlign.left),
                                 SizedBox(height: size.height * 0.01),
                                 RoundedInputField(

@@ -38,7 +38,7 @@ class _BodyState extends State<Body> {
       appBar: ResponsiveWidget.isSmallScreen(context)
           ? AppBar(
               iconTheme: const IconThemeData(color: primaryColor),
-              backgroundColor: Colors.white,
+              backgroundColor: offWhiteColor,
               elevation: 0,
               centerTitle: true,
               title: const Image(
