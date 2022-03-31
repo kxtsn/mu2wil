@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/Util/color.dart';
+
+import 'Admin/view.dart';
 
 class TopBarContents extends StatefulWidget {
   TopBarContents();
@@ -54,7 +57,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[0] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewAdmin();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -91,7 +103,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[1] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewManager();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

@@ -9,6 +9,7 @@ router.use('/view-all-portal-manager', require('./view-all-portal-manager'));
 router.use('/delete-super-admin', require('./delete-super-admin'));
 router.use('/delete-portal-manager', require('./delete-portal-manager'));
 router.use('/update-super-admin', require('./update-super-admin'));
+router.use('/update-portal-manager', require('./update-portal-manager'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

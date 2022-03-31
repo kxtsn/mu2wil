@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
+import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/Util/color.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -19,7 +21,16 @@ class MenuDrawer extends StatelessWidget {
             children: [
               const Flexible(child: SizedBox(height: 20)),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewAdmin();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Super Admin',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -33,7 +44,16 @@ class MenuDrawer extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewManager();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Portal Manager',
                   style: TextStyle(color: Colors.white, fontSize: 18),

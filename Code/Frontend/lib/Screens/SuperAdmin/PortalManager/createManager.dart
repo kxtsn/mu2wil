@@ -1,30 +1,29 @@
 // ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names
 
-import 'package:my_app/Fields/header.dart';
 import 'package:my_app/Fields/popUp.dart';
 import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Fields/roundedInputField.dart';
-import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
+import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/Util/color.dart';
-import 'getAdmin.dart';
+import 'getManager.dart';
 import 'package:my_app/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
-class AddAdmin extends StatefulWidget {
-  var admin;
-  AddAdmin({Key? key, this.admin}) : super(key: key);
-  static Future<AdminList>? futureAdminList;
+class AddManager extends StatefulWidget {
+  var manager;
+  AddManager({Key? key, this.manager}) : super(key: key);
+  static Future<ManagerList>? futureManagerList;
   @override
-  State<AddAdmin> createState() => _AddAdminListState();
+  State<AddManager> createState() => _AddManagerListState();
 }
 
-class _AddAdminListState extends State<AddAdmin> {
+class _AddManagerListState extends State<AddManager> {
   @override
   void initState() {
     super.initState();
-    if (widget.admin != null) {
+    if (widget.manager != null) {
       fillFields();
     }
   }
@@ -39,7 +38,7 @@ class _AddAdminListState extends State<AddAdmin> {
   bool _filledLastName = false;
   bool _filledEmail = false;
   bool _readOnly = false;
-  String text = "Create New Super Admin";
+  String text = "Create New Portal Manager";
 
   bool validateField() {
     bool flag = true;
@@ -56,15 +55,15 @@ class _AddAdminListState extends State<AddAdmin> {
   }
 
   void fillFields() {
-    if (widget.admin != null) {
+    if (widget.manager != null) {
       _readOnly = true;
-      text = "Update Super Admin Details";
-      _firstNameTextController.text = (widget.admin).firstName.toString();
-      firstName = (widget.admin).firstName.toString();
-      _lastNameTextController.text = (widget.admin).lastName.toString();
-      lastName = (widget.admin).lastName.toString();
-      _emailTextController.text = (widget.admin).email.toString();
-      email = (widget.admin).email.toString();
+      text = "Update Portal Manager Details";
+      _firstNameTextController.text = (widget.manager).firstName.toString();
+      firstName = (widget.manager).firstName.toString();
+      _lastNameTextController.text = (widget.manager).lastName.toString();
+      lastName = (widget.manager).lastName.toString();
+      _emailTextController.text = (widget.manager).email.toString();
+      email = (widget.manager).email.toString();
     }
   }
 
@@ -168,10 +167,10 @@ class _AddAdminListState extends State<AddAdmin> {
                                 // fields all filled
 
                                 if (validateField() == true) {
-                                  if (widget.admin == null) {
-                                    // employee dont exist
+                                  if (widget.manager == null) {
+                                    // manager dont exist
                                     if (await commitCheck(email) == false) {
-                                      // submit new admin
+                                      // submit new manager
                                       showDialog(
                                           context: context,
                                           builder: (BuildContext context) =>
@@ -180,9 +179,9 @@ class _AddAdminListState extends State<AddAdmin> {
                                                   iconColor: greenColor,
                                                   iconSize: 80,
                                                   title:
-                                                      'Added New Super Admin',
+                                                      'Added New Portal Manager',
                                                   subTitle:
-                                                      'Super Admin $firstName $lastName will be added.',
+                                                      'Portal Manager $firstName $lastName will be added.',
                                                   onPressed: () async {
                                                 await commitNew(
                                                     firstName, lastName, email);
@@ -190,7 +189,7 @@ class _AddAdminListState extends State<AddAdmin> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) {
-                                                      return ViewAdmin();
+                                                      return ViewManager();
                                                     },
                                                   ),
                                                 );
@@ -210,9 +209,9 @@ class _AddAdminListState extends State<AddAdmin> {
                                                       'Email ($email) already exist in the system.',
                                                   onPressed: () {}));
                                     }
-                                    // admin exist
+                                    // manager exist
                                   } else {
-                                    // edit employee details
+                                    // edit manager details
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -221,12 +220,12 @@ class _AddAdminListState extends State<AddAdmin> {
                                                 iconColor: greenColor,
                                                 iconSize: 80,
                                                 title:
-                                                    'Edit Super Admin Details',
+                                                    'Edit Portal Manager Details',
                                                 subTitle:
-                                                    'Super Admin will be updated.',
+                                                    'Portal Manager will be updated.',
                                                 onPressed: () async {
                                               await commitUpdate(
-                                                  widget.admin.adminId
+                                                  widget.manager.managerId
                                                       .toString(),
                                                   firstName,
                                                   lastName);
@@ -234,7 +233,7 @@ class _AddAdminListState extends State<AddAdmin> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) {
-                                                    return ViewAdmin();
+                                                    return ViewManager();
                                                   },
                                                 ),
                                               );

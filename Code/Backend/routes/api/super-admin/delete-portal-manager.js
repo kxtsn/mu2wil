@@ -30,11 +30,12 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             const e = await conn.query(`SELECT Email FROM portal_manager WHERE Portal_Manager_ID = ${pool.escape(req.body.managerId)}`)
 
             const email = e[0]["Email"]
+            console.log(email);
 
             const uresult = await conn.query(`DELETE FROM user WHERE Email = ${pool.escape(email)}`)
             console.log(util.inspect(uresult))
 
-            const mresult = await conn.query(`DELETE FROM portal_manager WHERE Portal_Manager_ID = ${pool.escape(req.body.managerId)})`)
+            const mresult = await conn.query(`DELETE FROM portal_manager WHERE Portal_Manager_ID = ${pool.escape(req.body.managerId)}`)
             console.log(mresult)
 
             await conn.query("COMMIT");
