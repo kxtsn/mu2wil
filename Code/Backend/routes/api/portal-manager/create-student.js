@@ -36,7 +36,7 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             if(cresult.length > 0) throw new Error("Email already exists in student");
 
             //C - Current, G - graduated
-            const mresult = await conn.query(`INSERT INTO student (Murdoch_Student_ID, First_Name, Last_Name, Email, Status) values(${pool.escape(req.body.studentId)}, ${pool.escape(req.body.firstName)}, ${pool.escape(req.body.lastName)}, ${pool.escape(req.body.email)}, 'C')`)
+            const mresult = await conn.query(`INSERT INTO student (Murdoch_Student_ID, First_Name, Last_Name, Email, Status) values(${pool.escape(req.body.murdochId)}, ${pool.escape(req.body.firstName)}, ${pool.escape(req.body.lastName)}, ${pool.escape(req.body.email)}, 'C')`)
 
             console.log(mresult)
 

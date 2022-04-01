@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Screens/SuperAdmin/Company/view.dart';
-import 'package:my_app/Screens/SuperAdmin/Listing/view.dart';
-import 'package:my_app/Screens/SuperAdmin/Student/view.dart';
-import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/Util/color.dart';
 
-import 'Admin/view.dart';
+//import 'Student/view.dart';
 
 class TopBarContents extends StatefulWidget {
   TopBarContents();
@@ -16,10 +12,6 @@ class TopBarContents extends StatefulWidget {
 
 class _TopBarContentsState extends State<TopBarContents> {
   final List _isHovering = [
-    false,
-    false,
-    false,
-    false,
     false,
     false,
     false,
@@ -60,21 +52,12 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[0] = false;
                         });
                       },
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewAdmin();
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Super Admin',
+                            'Students',
                             style: TextStyle(
                                 color: _isHovering[0]
                                     ? primaryColor
@@ -90,7 +73,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                             visible: _isHovering[0],
                             child: Container(
                               height: 2,
-                              width: 100,
+                              width: 80,
                               color: greyColor,
                             ),
                           )
@@ -106,21 +89,12 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[1] = false;
                         });
                       },
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewManager();
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Portal Manager',
+                            'Companies',
                             style: TextStyle(
                                 color: _isHovering[1]
                                     ? primaryColor
@@ -136,7 +110,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                             visible: _isHovering[1],
                             child: Container(
                               height: 2,
-                              width: 100,
+                              width: 80,
                               color: greyColor,
                             ),
                           )
@@ -152,21 +126,12 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[2] = false;
                         });
                       },
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewStudent();
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Students',
+                            'Listing',
                             style: TextStyle(
                                 color: _isHovering[2]
                                     ? primaryColor
@@ -182,7 +147,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                             visible: _isHovering[2],
                             child: Container(
                               height: 2,
-                              width: 80,
+                              width: 70,
                               color: greyColor,
                             ),
                           )
@@ -198,21 +163,12 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[3] = false;
                         });
                       },
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewCompany();
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Companies',
+                            'Testimonial',
                             style: TextStyle(
                                 color: _isHovering[3]
                                     ? primaryColor
@@ -244,21 +200,12 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[4] = false;
                         });
                       },
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return ViewListing();
-                            },
-                          ),
-                        );
-                      },
+                      onTap: () {},
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Listing',
+                            'Log Out',
                             style: TextStyle(
                                 color: _isHovering[4]
                                     ? primaryColor
@@ -272,80 +219,6 @@ class _TopBarContentsState extends State<TopBarContents> {
                             maintainState: true,
                             maintainSize: true,
                             visible: _isHovering[4],
-                            child: Container(
-                              height: 2,
-                              width: 70,
-                              color: greyColor,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 30),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[5] = true
-                              : _isHovering[5] = false;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Testimonial',
-                            style: TextStyle(
-                                color: _isHovering[5]
-                                    ? primaryColor
-                                    : primaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                          const SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[5],
-                            child: Container(
-                              height: 2,
-                              width: 80,
-                              color: greyColor,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: screenSize.width / 30),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          value
-                              ? _isHovering[6] = true
-                              : _isHovering[6] = false;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'Log Out',
-                            style: TextStyle(
-                                color: _isHovering[6]
-                                    ? primaryColor
-                                    : primaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
-                          const SizedBox(height: 5),
-                          Visibility(
-                            maintainAnimation: true,
-                            maintainState: true,
-                            maintainSize: true,
-                            visible: _isHovering[6],
                             child: Container(
                               height: 2,
                               width: 80,

@@ -19,6 +19,8 @@ router.use('/approve-student-testimonial', require('./approve-student-testimonia
 router.use('/reject-employer-testimonial', require('./reject-employer-testimonial'));
 router.use('/approve-employer-testimonial', require('./approve-employer-testimonial'));
 router.use('/delete-testimonial', require('./delete-testimonial'));
+router.use('/update-student', require('./update-student'));
+router.use('/delete-student', require('./delete-student'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

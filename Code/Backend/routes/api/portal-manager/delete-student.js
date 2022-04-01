@@ -30,12 +30,15 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             const e = await conn.query(`SELECT Email FROM student WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
 
             const email = e[0]["Email"]
+            console.log(email)
 
             const uresult = await conn.query(`DELETE FROM user WHERE Email = ${pool.escape(email)}`)
             console.log(util.inspect(uresult))
+            console.log("hi1")
 
-            const mresult = await conn.query(`UPDATE student SET Status = "G" WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
+            const mresult = await conn.query(`UPDATE student SET Status = "D" WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
             console.log(mresult)
+            console.log("hi")
 
             await conn.query("COMMIT");
 

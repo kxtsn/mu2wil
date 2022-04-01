@@ -130,12 +130,6 @@ class _ManagerRowState extends State<ManagerRow> {
                       )),
                       const DataColumn(
                           label: Text(
-                        'Portal Manager ID',
-                        style: TextStyle(
-                            color: primaryColor, fontWeight: FontWeight.bold),
-                      )),
-                      const DataColumn(
-                          label: Text(
                         'First Name',
                         style: TextStyle(
                             color: primaryColor, fontWeight: FontWeight.bold),

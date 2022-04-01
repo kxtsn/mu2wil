@@ -6,11 +6,10 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("Update Graduated Student Status")
-router.post('/', isLoggedIn, async function (req, res, next) {
-    console.log(JSON.stringify(req.userData["role"]));
-    //super admin and portal manager validation
-    if (req.userData["role"] == 1 || req.userData["role"] == 2) {
+console.log("View All Students")
+router.get('/', isLoggedIn, async function (req, res, next) {
+    //super admin validation
+    if (req.userData["role"] == 1) {
 
         //Get connection from pool
         const conn = await connection();
@@ -27,20 +26,12 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const e = await conn.query(`SELECT Email FROM student WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
+            const mresult = await conn.query(`SELECT * FROM student WHERE Status != "D"`)
 
-            const email = e[0]["Email"]
-
-            const uresult = await conn.query(`DELETE FROM user WHERE Email = ${pool.escape(email)}`)
-            console.log(util.inspect(uresult))
-
-            const mresult = await conn.query(`UPDATE student SET Status = "G" WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
-            console.log(mresult)
-
-            await conn.query("COMMIT");
+            console.log(util.inspect(mresult))
 
             res.status(201).send({
-                msg: 'Student Account Deleted, Status updated'
+                result: mresult
             });
 
         } catch (err) {

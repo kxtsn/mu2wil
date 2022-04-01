@@ -92,7 +92,6 @@ class ManagerTableSource extends DataTableSource {
                       ));
             },
           ))),
-      DataCell(Text((managerList.managerId).toString())),
       DataCell(Text((managerList.firstName).toString())),
       DataCell(Text((managerList.lastName).toString())),
       DataCell(Text((managerList.email).toString()))

@@ -26,7 +26,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const mresult = await conn.query(`SELECT * FROM student`)
+            const mresult = await conn.query(`SELECT * FROM student WHERE Status = "C"`)
 
             console.log(util.inspect(mresult))
 

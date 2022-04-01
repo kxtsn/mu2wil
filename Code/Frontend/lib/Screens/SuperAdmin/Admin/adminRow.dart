@@ -130,12 +130,6 @@ class _AdminRowState extends State<AdminRow> {
                       )),
                       const DataColumn(
                           label: Text(
-                        'Super Admin ID',
-                        style: TextStyle(
-                            color: primaryColor, fontWeight: FontWeight.bold),
-                      )),
-                      const DataColumn(
-                          label: Text(
                         'First Name',
                         style: TextStyle(
                             color: primaryColor, fontWeight: FontWeight.bold),
