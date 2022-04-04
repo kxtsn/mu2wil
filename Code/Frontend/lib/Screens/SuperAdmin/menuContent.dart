@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/LoginModule/Login/login.dart';
+import 'package:my_app/Screens/SuperAdmin/Testimonial/view.dart';
 import 'package:my_app/Screens/SuperAdmin/Company/view.dart';
 import 'package:my_app/Screens/SuperAdmin/Listing/view.dart';
 import 'package:my_app/Screens/SuperAdmin/Student/view.dart';
@@ -290,7 +292,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[5] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewTestimonial();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -327,7 +338,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[6] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const Login();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/LoginModule/Login/login.dart';
+import 'package:my_app/Screens/PortalManager/Company/view.dart';
+import 'package:my_app/Screens/PortalManager/Listing/view.dart';
+import 'package:my_app/Screens/PortalManager/Student/view.dart';
+import 'package:my_app/Screens/PortalManager/Testimonial/view.dart';
 import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
 import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/Util/color.dart';
@@ -21,7 +26,16 @@ class MenuDrawer extends StatelessWidget {
             children: [
               const Flexible(child: SizedBox(height: 20)),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewStudent();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Students',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -35,7 +49,16 @@ class MenuDrawer extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewCompany();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Companies',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -49,7 +72,16 @@ class MenuDrawer extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewListing();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Listing',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -63,7 +95,16 @@ class MenuDrawer extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewTestimonial();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Testimonials',
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -77,7 +118,16 @@ class MenuDrawer extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const Login();
+                      },
+                    ),
+                  );
+                },
                 child: const Text(
                   'Log Out',
                   style: TextStyle(color: Colors.white, fontSize: 18),

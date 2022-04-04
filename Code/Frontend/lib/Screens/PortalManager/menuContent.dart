@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/LoginModule/Login/login.dart';
+import 'package:my_app/Screens/PortalManager/Company/view.dart';
+import 'package:my_app/Screens/PortalManager/Listing/view.dart';
+import 'package:my_app/Screens/PortalManager/Student/view.dart';
+import 'package:my_app/Screens/PortalManager/Testimonial/view.dart';
 import 'package:my_app/Util/color.dart';
 
 //import 'Student/view.dart';
@@ -52,7 +57,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[0] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewStudent();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -89,7 +103,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[1] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewCompany();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -126,7 +149,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[2] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewListing();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -163,7 +195,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[3] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewTestimonial();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -200,7 +241,16 @@ class _TopBarContentsState extends State<TopBarContents> {
                               : _isHovering[4] = false;
                         });
                       },
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const Login();
+                            },
+                          ),
+                        );
+                      },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [

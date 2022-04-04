@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'Screens/LoginModule/Login/login.dart';
 import 'Screens/SuperAdmin/Admin/view.dart';
 import 'Screens/SuperAdmin/home.dart' as SA;
-// import 'Screens/Sales/home.dart' as Sales;
+import 'Screens/PortalManager/home.dart' as PortalManager;
 // import 'Screens/Warehouse/home.dart' as Warehouse;
 // import 'Screens/Admin/home.dart' as Admin;
 
@@ -76,9 +76,9 @@ class BaseBuilding extends StatelessWidget {
                     if (role == 1) {
                       return const SA.Home();
                     }
-                    //   if (role == "2") {
-                    //     return const PortalManager.Home();
-                    //   }
+                    if (role == "2") {
+                      return const PortalManager.Home();
+                    }
                     //   if (role == "3") {
                     //     return const Student.Home();
                     //   }
@@ -100,7 +100,7 @@ class BaseBuilding extends StatelessWidget {
           '/login': (context) => const Login(),
           //'/employer': (context) => const DI.Home(),
           '/admin': (context) => const SA.Home(),
-          //'/portalManager': (context) => const EmployeeScreen(),
+          '/portalManager': (context) => const PortalManager.Home(),
           //'/student': (context) => const Sales.Home(),
         });
   }
