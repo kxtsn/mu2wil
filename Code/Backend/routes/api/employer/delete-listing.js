@@ -6,9 +6,10 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Own Listings")
-router.get('/', isLoggedIn, async function (req, res, next) {
-    //employer validation
+console.log("Delete Pending Listing")
+router.post('/', isLoggedIn, async function (req, res, next) {
+    console.log(JSON.stringify(req.userData["role"]));
+    //super admin validation
     if (req.userData["role"] == 4) {
 
         //Get connection from pool
@@ -26,16 +27,13 @@ router.get('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const uid = await conn.query(`SELECT Employer_ID FROM user WHERE User_ID = ${pool.escape(req.userData["id"])}`)
+            const uresult = await conn.query(`DELETE FROM listing WHERE Listing_ID = ${pool.escape(req.body.listingId)}`)
+            console.log(util.inspect(uresult))
 
-            const uids = uid[0]["Employer_ID"]
-
-            const mresult = await conn.query(`SELECT l.*,(SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID) as Applicants FROM listing l WHERE Employer_ID = ${pool.escape(uids)}`)
-
-            console.log(util.inspect(mresult))
+            await conn.query("COMMIT");
 
             res.status(201).send({
-                result: mresult
+                msg: 'Listing Deleted'
             });
 
         } catch (err) {

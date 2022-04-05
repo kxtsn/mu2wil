@@ -5,10 +5,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Screens/LoginModule/Login/login.dart';
-import 'Screens/SuperAdmin/Admin/view.dart';
 import 'Screens/SuperAdmin/home.dart' as SA;
 import 'Screens/PortalManager/home.dart' as PortalManager;
-// import 'Screens/Warehouse/home.dart' as Warehouse;
+import 'Screens/Employer/home.dart' as E;
 // import 'Screens/Admin/home.dart' as Admin;
 
 import 'main.dart';
@@ -70,35 +69,32 @@ class BaseBuilding extends StatelessWidget {
                       .decode(base64.decode(base64.normalize(response[1]))));
                   if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
                       .isAfter(DateTime.now())) {
-                    //return HomePage(str.toString(), payload);
                     var role = payload['role'];
                     print("Role: " + role.toString());
                     if (role == 1) {
                       return const SA.Home();
-                    }
-                    if (role == "2") {
+                    } else if (role == 2) {
                       return const PortalManager.Home();
                     }
                     //   if (role == "3") {
                     //     return const Student.Home();
                     //   }
-                    //   if (role == "4") {
-                    //     return const Employer.Home();
-                    //   } else {
-                    //     return const Login();
-                    //   }
-                    // } else {
+                    else if (role == 4) {
+                      return const E.Home();
+                    } else {
+                      return const Login();
+                    }
+                  } else {
                     return const Login();
                   }
                 }
               } else {
                 return const Login();
               }
-              return const Login();
             }),
         routes: {
           '/login': (context) => const Login(),
-          //'/employer': (context) => const DI.Home(),
+          '/employer': (context) => const E.Home(),
           '/admin': (context) => const SA.Home(),
           '/portalManager': (context) => const PortalManager.Home(),
           //'/student': (context) => const Sales.Home(),

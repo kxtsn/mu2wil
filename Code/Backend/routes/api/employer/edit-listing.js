@@ -33,9 +33,9 @@ router.post('/', isLoggedIn, async function (req, res, next) {
                 const cDate = new Date(req.body.closingDate);
                 closingDate = format(cDate, 'yyyy-MM-dd HH:mm:ss');
             }
-
-            const mresult = await conn.query(`UPDATE listing SET Title = ${pool.escape(req.body.title)}, Description = ${pool.escape(req.body.description)}, Closing_Date = ${pool.escape(closingDate)}, Available_Slot = ${pool.escape(req.body.slot)}, Status = 'Pending'`)
-
+         
+            const mresult = await conn.query(`UPDATE listing SET Title = ${pool.escape(req.body.title)}, Description = ${pool.escape(req.body.description)}, Closing_Date = ${pool.escape(closingDate)}, Available_Slot = ${pool.escape(req.body.slot)}, Status = 'Pending' WHERE Listing_ID = ${pool.escape(req.body.listingId)}`)
+            
             console.log(mresult)
 
             await conn.query("COMMIT");

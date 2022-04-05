@@ -3,6 +3,7 @@ var router = require('express').Router();
 console.log("In api/employer")
 
 router.use('/register-employer', require('./register-employer'));
+router.use('/get-company-detail', require('./get-company-detail'));
 
 //application
 router.use('/view-student-application', require('./view-student-application'));
@@ -14,6 +15,7 @@ router.use('/edit-listing', require('./edit-listing'));
 router.use('/create-listing', require('./create-listing'));
 router.use('/close-listing', require('./close-listing'));
 router.use('/view-own-listing', require('./view-own-listing'));
+router.use('/delete-listing', require('./delete-listing'));
 
 //testimonials
 router.use('/view-company-testimonial', require('./view-company-testimonial'));

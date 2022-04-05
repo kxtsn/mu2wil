@@ -6,7 +6,7 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Own Listings")
+console.log("View Company Details")
 router.get('/', isLoggedIn, async function (req, res, next) {
     //employer validation
     if (req.userData["role"] == 4) {
@@ -30,7 +30,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
 
             const uids = uid[0]["Employer_ID"]
 
-            const mresult = await conn.query(`SELECT l.*,(SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID) as Applicants FROM listing l WHERE Employer_ID = ${pool.escape(uids)}`)
+            const mresult = await conn.query(`SELECT * FROM employer WHERE Employer_ID = ${pool.escape(uids)}`)
 
             console.log(util.inspect(mresult))
 

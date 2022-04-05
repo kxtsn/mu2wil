@@ -33,13 +33,19 @@ router.post('/', isLoggedIn, async function (req, res, next) {
                 const cDate = new Date(req.body.closingDate);
                 closingDate = format(cDate, 'yyyy-MM-dd HH:mm:ss');
             }
+            console.log(closingDate)
+            console.log("hi1")
 
             const uid = await conn.query(`SELECT Employer_ID FROM user WHERE User_ID = ${pool.escape(req.userData["id"])}`)
 
             const uids = uid[0]["Employer_ID"]
 
-            const mresult = await conn.query(`INSERT INTO listing (Employer_ID, Title, Description, Closing_Date, Available_Slot, Status) values(${pool.escape(uids)}, ${pool.escape(req.body.title)}, ${pool.escape(req.body.description)}, ${pool.escape(closingDate)}, ${pool.escape(req.body.slot)}, 'Pending')`)
+            console.log(uids)
 
+            console.log("hi2")
+
+            const mresult = await conn.query(`INSERT INTO listing (Employer_ID, Title, Description, Closing_Date, Available_Slot, Status) VALUES ( ${pool.escape(uids)}, ${pool.escape(req.body.title)}, ${pool.escape(req.body.description)}, ${pool.escape(closingDate)}, ${pool.escape(req.body.slot)}, 'Pending')`)
+            console.log("hi3")
             console.log(mresult)
 
             await conn.query("COMMIT");
