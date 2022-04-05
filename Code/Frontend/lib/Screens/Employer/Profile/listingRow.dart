@@ -143,7 +143,7 @@ class _ListingRowState extends State<ListingRow> {
             const SizedBox(height: 20),
             Center(
               child: RoundedButton(
-                  text: "CLOSE",
+                  text: "CLOSE LISTING",
                   widthSize: changingWidth,
                   press: () {
                     List<ListingList>? selectedList =
