@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/Screens/Employer/Application/view.dart';
-import 'package:my_app/Screens/Employer/Listing/view.dart';
-import 'package:my_app/Screens/Employer/Profile/view.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:my_app/Util/color.dart';
 
@@ -24,14 +21,14 @@ class MenuDrawer extends StatelessWidget {
               const Flexible(child: SizedBox(height: 20)),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ViewProfile();
-                      },
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return ViewProfile();
+                  //     },
+                  //   ),
+                  // );
                 },
                 child: const Text(
                   'Dashboard',
@@ -47,37 +44,14 @@ class MenuDrawer extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ViewApplication();
-                      },
-                    ),
-                  );
-                },
-                child: const Text(
-                  'Applications',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
-                child: Divider(
-                  color: greyColor,
-                  thickness: 1,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ViewListing();
-                      },
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return ViewListing();
+                  //     },
+                  //   ),
+                  // );
                 },
                 child: const Text(
                   'Listings',

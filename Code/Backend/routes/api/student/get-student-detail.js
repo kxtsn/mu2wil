@@ -6,9 +6,9 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Applications Applied")
+console.log("View Student Details")
 router.get('/', isLoggedIn, async function (req, res, next) {
-    //student validation
+    //employer validation
     if (req.userData["role"] == 3) {
 
         //Get connection from pool
@@ -30,8 +30,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
 
             const uids = uid[0]["Student_ID"]
 
-            const mresult = await conn.query(`SELECT a.Application_ID, a.Status, l.Title, l.Description, l.Closing_Date, l.Status as Listing_Status, (SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID AND a.Status != "Failed" AND a.Status != "Cancelled") as Applicants 
-            FROM listing l, application a WHERE l.Listing_ID = a.Listing_ID AND a.Student_ID = ${pool.escape(uids)}`)
+            const mresult = await conn.query(`SELECT * FROM student WHERE Student_ID = ${pool.escape(uids)}`)
 
             console.log(util.inspect(mresult))
 

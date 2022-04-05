@@ -8,7 +8,7 @@ import 'Screens/LoginModule/Login/login.dart';
 import 'Screens/SuperAdmin/home.dart' as SA;
 import 'Screens/PortalManager/home.dart' as PortalManager;
 import 'Screens/Employer/home.dart' as E;
-// import 'Screens/Admin/home.dart' as Admin;
+import 'Screens/Student/home.dart' as S;
 
 import 'main.dart';
 import 'Util/color.dart';
@@ -75,11 +75,9 @@ class BaseBuilding extends StatelessWidget {
                       return const SA.Home();
                     } else if (role == 2) {
                       return const PortalManager.Home();
-                    }
-                    //   if (role == "3") {
-                    //     return const Student.Home();
-                    //   }
-                    else if (role == 4) {
+                    } else if (role == 3) {
+                      return const S.Home();
+                    } else if (role == 4) {
                       return const E.Home();
                     } else {
                       return const Login();
@@ -97,7 +95,7 @@ class BaseBuilding extends StatelessWidget {
           '/employer': (context) => const E.Home(),
           '/admin': (context) => const SA.Home(),
           '/portalManager': (context) => const PortalManager.Home(),
-          //'/student': (context) => const Sales.Home(),
+          '/student': (context) => const S.Home(),
         });
   }
 }
