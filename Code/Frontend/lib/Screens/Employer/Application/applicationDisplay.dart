@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_literals_to_create_immutables, must_be_immutable
 import 'dart:ui';
 
-import 'package:my_app/Fields/card.dart';
+import 'package:my_app/Fields/applicationCard.dart';
 import 'package:my_app/Fields/popUp.dart';
 import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Screens/Employer/Application/getApplication.dart';
