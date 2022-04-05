@@ -2,6 +2,7 @@
 
 import 'package:intl/intl.dart';
 import 'package:my_app/Fields/popUp.dart';
+import 'package:my_app/Screens/Employer/Application/view.dart';
 import 'package:my_app/Screens/Employer/Listing/view.dart';
 import 'package:my_app/util/color.dart';
 import 'getListing.dart';
@@ -147,7 +148,18 @@ class ListingTableSource extends DataTableSource {
                         color: Colors.blue,
                         decoration: TextDecoration.underline),
                   ),
-                  onTap: () {}))),
+                  onTap: () {
+                    Navigator.push(
+                      _context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ViewApplication(
+                            listing: listingList,
+                          );
+                        },
+                      ),
+                    );
+                  }))),
           DataCell(Text((listingList.status).toString())),
         ]);
   }

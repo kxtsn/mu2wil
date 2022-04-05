@@ -7,6 +7,7 @@ router.use('/get-company-detail', require('./get-company-detail'));
 
 //application
 router.use('/view-student-application', require('./view-student-application'));
+router.use('/view-application-by-listing', require('./view-application-by-listing'));
 router.use('/reject-application', require('./reject-application'));
 router.use('/accept-application', require('./accept-application'));
 

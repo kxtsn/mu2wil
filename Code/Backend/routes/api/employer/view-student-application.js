@@ -30,7 +30,11 @@ router.get('/', isLoggedIn, async function (req, res, next) {
 
             const uids = uid[0]["Employer_ID"]
 
-            const mresult = await conn.query(`SELECT * FROM application WHERE Listing_ID in (SELECT Listing_ID from listing WHERE Employer_ID = ${pool.escape(uids)})`)
+            const mresult = await conn.query(`SELECT a.Application_ID, l.Title, l.Description, s.First_Name, s.Last_Name, s.Email, s.Murdoch_Student_ID, a.Status
+            FROM application a, listing l, student s
+            WHERE a.Listing_ID = l.Listing_ID 
+            AND a.Student_ID = s.Student_ID 
+            AND a.Status != "Cancelled" AND l.Employer_ID = ${pool.escape(uids)}`)
 
             console.log(util.inspect(mresult))
 

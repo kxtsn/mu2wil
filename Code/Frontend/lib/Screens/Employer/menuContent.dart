@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/Employer/Application/view.dart';
 import 'package:my_app/Screens/Employer/Listing/view.dart';
 import 'package:my_app/Screens/Employer/Profile/view.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
@@ -100,14 +101,14 @@ class _TopBarContentsState extends State<TopBarContents> {
                         });
                       },
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return ViewApplication();
-                        //     },
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewApplication();
+                            },
+                          ),
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
