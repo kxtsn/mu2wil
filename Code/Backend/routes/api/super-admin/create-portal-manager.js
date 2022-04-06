@@ -45,12 +45,14 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             console.log(portalids)
 
 
-            var password = generator.generate({
-                length: 10,
-                numbers: true
-            });
+            // var password = generator.generate({
+            //     length: 10,
+            //     numbers: true
+            // });
     
-            console.log(password);
+            //console.log(password);
+
+            var password = "portalmanager1!"
             
             const hashedpassword = await bcrypt.hash(password, 10)
             console.log(hashedpassword)
