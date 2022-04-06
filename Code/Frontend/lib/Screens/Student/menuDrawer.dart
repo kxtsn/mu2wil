@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
+import 'package:my_app/Screens/Student/Listing/view.dart';
+import 'package:my_app/Screens/Student/Profile/view.dart';
 import 'package:my_app/Util/color.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -21,14 +23,14 @@ class MenuDrawer extends StatelessWidget {
               const Flexible(child: SizedBox(height: 20)),
               InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return ViewProfile();
-                  //     },
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewProfile();
+                      },
+                    ),
+                  );
                 },
                 child: const Text(
                   'Dashboard',
@@ -44,14 +46,14 @@ class MenuDrawer extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return ViewListing();
-                  //     },
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const ViewListing();
+                      },
+                    ),
+                  );
                 },
                 child: const Text(
                   'Listings',

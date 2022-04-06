@@ -55,7 +55,7 @@ class _DashBoardState extends State<DashBoard> {
                     width: 400,
                   )),
                   Header(
-                    title: 'Your Current Application(s)',
+                    title: 'Your Application(s)',
                   ),
                 ]),
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
