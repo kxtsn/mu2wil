@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/Screens/Employer/Application/view.dart';
 import 'package:my_app/Screens/Employer/Listing/view.dart';
 import 'package:my_app/Screens/Employer/Profile/view.dart';
+import 'package:my_app/Screens/Employer/Testimonial/view.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:my_app/Util/color.dart';
 
@@ -193,14 +194,14 @@ class _TopBarContentsState extends State<TopBarContents> {
                         });
                       },
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return ViewTestimonial();
-                        //     },
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewTestimonial();
+                            },
+                          ),
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

@@ -5,29 +5,27 @@ import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_app/Screens/Student/Application/getApplication.dart';
-import 'package:my_app/Screens/Student/Testimonial/getWrittenTestimonial.dart';
+import 'package:my_app/Screens/Employer/Application/getApplication.dart';
+import 'package:my_app/Screens/Employer/Testimonial/getWrittenTestimonial.dart';
 
 import 'package:flutter/material.dart';
 
 class TestimonialPopUp extends StatelessWidget {
-  StdTestimonialList? testimonial;
   ApplicationList listing;
-  TestimonialPopUp(BuildContext context,
-      {Key? key, this.testimonial, required this.listing})
+  TestimonialPopUp(BuildContext context, {Key? key, required this.listing})
       : super(key: key);
 
   final _commentTextController = TextEditingController();
   String comment = "";
   String fileName = "";
 
-  String getTitle() {
-    if (testimonial != null) {
-      return "Edit Testimonial";
-    } else {
-      return "Write Testimonial";
-    }
-  }
+  // String getTitle() {
+  //   if (testimonial != null) {
+  //     return "Edit Testimonial";
+  //   } else {
+  //     return "Write Testimonial";
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -40,15 +38,20 @@ class TestimonialPopUp extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                getTitle(),
-                style: const TextStyle(
+              const Text(
+                "Write Testimonial",
+                style: TextStyle(
                   color: Colors.blue,
                   fontSize: 20,
                 ),
               ),
               const SizedBox(height: 20),
-              Text("Please write your testimonial for " + listing.title! + ".",
+              Text(
+                  "Please write your testimonial for " +
+                      listing.firstName! +
+                      " " +
+                      listing.lastName! +
+                      ".",
                   style: const TextStyle(
                     color: Colors.black,
                   )),

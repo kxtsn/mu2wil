@@ -5,6 +5,7 @@ import 'package:my_app/Fields/header.dart';
 import 'package:my_app/Fields/popUp.dart';
 import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Fields/roundedInputField.dart';
+import 'package:my_app/Fields/textFieldContainer.dart';
 import 'package:my_app/Screens/Employer/Listing/view.dart';
 import 'package:my_app/Util/color.dart';
 import 'getListing.dart';
@@ -133,19 +134,22 @@ class _AddListingListState extends State<AddListing> {
                                       ? 'field must be filled'
                                       : null,
                                 ),
-                                TextField(
-                                  keyboardType: TextInputType.multiline,
-                                  controller: _descriptionTextController,
-                                  // widthSize: changingWidth,
-                                  decoration: InputDecoration(
-                                    hintText: "Description",
-                                    errorText: _filledDescription
-                                        ? 'field must be filled'
-                                        : null,
+                                TextFieldContainer(
+                                  widthSize: changingWidth,
+                                  child: TextField(
+                                    keyboardType: TextInputType.multiline,
+                                    controller: _descriptionTextController,
+                                    // widthSize: changingWidth,
+                                    decoration: InputDecoration(
+                                      hintText: "Description",
+                                      errorText: _filledDescription
+                                          ? 'field must be filled'
+                                          : null,
+                                    ),
+                                    onChanged: (value) {
+                                      description = value;
+                                    },
                                   ),
-                                  onChanged: (value) {
-                                    description = value;
-                                  },
                                 ),
                                 //set validation on field
                                 RoundedInputField(

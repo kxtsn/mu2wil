@@ -6,6 +6,7 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 const format = require('date-fns/format');
+const fs = require("fs");
 
 console.log("Create Testimonial")
 router.post('/', isLoggedIn, async function (req, res, next) {
@@ -33,11 +34,21 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             const lids = lid[0]["Listing_ID"]
             const sids = lid[0]["Student_ID"]
 
+            console.log("hi")
+
             const eid = await conn.query(`SELECT Employer_ID FROM listing WHERE Listing_ID = ${pool.escape(lids)}`)
-
+            console.log("hi1")
             const eids = eid[0]["Employer_ID"]
+            console.log("HIHI")
 
-            const mresult = await conn.query(`INSERT INTO student_testimonial (Application_ID, Created_By, Created_On, Employer_ID, Comment, File, Status) values(${pool.escape(req.body.applicationId)}, ${pool.escape(sids)}, now(), ${pool.escape(eids)}, ${pool.escape(req.body.comment)}, ${pool.escape(req.body.blob)}, 'Pending')`)
+
+            const buf = Buffer.from(req.body.blob);
+            console.log(buf)
+
+            console.log("HII")
+            
+            const mresult = await conn.query(`INSERT INTO student_testimonial (Application_ID, Created_By, Created_On, Employer_ID, Comment, File, Status) VALUES (${pool.escape(req.body.applicationId)}, ${pool.escape(sids)},  now(), ${pool.escape(eids)}, ${pool.escape(req.body.comment)}, ${pool.escape(buf)}, "Pending")`)
+            console.log("hi2")
 
             console.log(mresult)
 

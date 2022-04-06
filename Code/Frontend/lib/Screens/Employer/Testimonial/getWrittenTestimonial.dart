@@ -1,25 +1,28 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
-
+import 'dart:async';
 import 'package:flutter/foundation.dart';
+
+import '../../../../main.dart';
+
 import 'package:http/http.dart' as http;
-import 'package:universal_html/html.dart';
 
-import '../../../main.dart';
+List<EmpTestimonialList> parseTestimonialList(String responseBody) {
+  Map<dynamic, dynamic> empTestimonialMap =
+      jsonDecode(responseBody) as Map<String, dynamic>;
 
-List<ApplicationList> parseApplicantDetails(String responseBody) {
-  Map<dynamic, dynamic> applicantDetailsMap = jsonDecode(responseBody);
-
-  List<ApplicationList> _applicantDetails =
-      (applicantDetailsMap['result']! as List)
-          .map((item) => ApplicationList.fromJson(item))
+  List<EmpTestimonialList> _empTestimonialList =
+      (empTestimonialMap['result']! as List)
+          .map((item) => EmpTestimonialList.fromJson(item))
           .toList();
 
-  return _applicantDetails;
+  return _empTestimonialList;
 }
 
-Future<List<ApplicationList>> fetchApplicationDetails(
+Future<List<EmpTestimonialList>> fetchEmpTestimonialList(
     http.Client client) async {
-  var url = "$SERVER_IP/api/student/view-own-application";
+  var url = "$SERVER_IP/api/employer/view-written-testimonial";
   String? token;
   if (kIsWeb) {
     token = await localstorage.getToken();
@@ -37,16 +40,16 @@ Future<List<ApplicationList>> fetchApplicationDetails(
     // If the server did return a 201 OK response,
     // then parse the JSON.
     print(response.body);
-    return parseApplicantDetails(response.body);
+    return parseTestimonialList(response.body);
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception(
-        'Failed to load Application Details ${response.statusCode.toString()}');
+        'Failed to load testimonial List ${response.statusCode.toString()}');
   }
 }
 
-Future cancelApplication(String applicationId) async {
+Future commitDelete(String testimonialId) async {
   String? token;
   if (kIsWeb) {
     token = await localstorage.getToken();
@@ -55,13 +58,13 @@ Future cancelApplication(String applicationId) async {
   }
 
   final response = await http.post(
-    Uri.parse("$SERVER_IP/api/student/cancel-application"),
+    Uri.parse("$SERVER_IP/api/employer/delete-testimonial"),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     },
     body: jsonEncode(<String, String>{
-      'applicationId': applicationId,
+      'testimonialId': testimonialId,
     }),
   );
 
@@ -76,7 +79,7 @@ Future cancelApplication(String applicationId) async {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     throw Exception(
-        'Failed to cancel application. ${response.statusCode.toString()}');
+        'Failed to delete testimonial. ${response.statusCode.toString()}');
   }
 }
 
@@ -90,7 +93,7 @@ Future createTestimonial(
   }
 
   final response = await http.post(
-    Uri.parse("$SERVER_IP/api/student/create-testimonial"),
+    Uri.parse("$SERVER_IP/api/employer/create-testimonial"),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
@@ -117,35 +120,46 @@ Future createTestimonial(
   }
 }
 
-class ApplicationList {
-  int? applicationId;
-  int? listingId;
-  String? title;
-  String? description;
-  int? applicants;
-  String? closingDate;
-  String? listingStatus;
-  String? status;
+class EmpTestimonialList {
+  final int testimonialId;
+  final int applicationId;
+  final int createdBy;
+  final int studentId;
+  final String companyName;
+  final String firstName;
+  final String lastName;
+  final String createdOn;
+  final String comment;
+  final dynamic image;
+  final String status;
 
-  ApplicationList(
-      {this.applicationId,
-      this.listingId,
-      this.title,
-      this.description,
-      this.applicants,
-      this.closingDate,
-      this.listingStatus,
-      this.status});
+  EmpTestimonialList(
+      {required this.testimonialId,
+      required this.applicationId,
+      required this.createdBy,
+      required this.studentId,
+      required this.companyName,
+      required this.firstName,
+      required this.lastName,
+      required this.createdOn,
+      required this.comment,
+      required this.image,
+      required this.status});
 
-  factory ApplicationList.fromJson(Map<String, dynamic> json) =>
-      ApplicationList(
+  bool selected = false;
+
+  factory EmpTestimonialList.fromJson(Map<dynamic, dynamic> json) {
+    return EmpTestimonialList(
+        testimonialId: json["Employer_Testimonial_ID"] as int,
         applicationId: json["Application_ID"] as int,
-        listingId: json["Listing_ID"] as int,
-        title: json["Title"] as String,
-        description: json["Description"] as String,
-        applicants: json["Applicants"] as int,
-        closingDate: json["Closing_Date"] as String,
-        listingStatus: json["Listing_Status"] as String,
-        status: json["Status"] as String,
-      );
+        createdBy: json["Created_By"] as int,
+        studentId: json["Student_ID"] as int,
+        companyName: json["Company_Name"] as String,
+        firstName: json["First_Name"] as String,
+        lastName: json["Last_Name"] as String,
+        createdOn: json["Created_On"] as String,
+        comment: json["Comment"] as String,
+        image: json["File"]["data"],
+        status: json["Status"] as String);
+  }
 }

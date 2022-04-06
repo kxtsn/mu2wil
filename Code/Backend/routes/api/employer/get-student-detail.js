@@ -6,8 +6,8 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Own Listing Applications")
-router.get('/', isLoggedIn, async function (req, res, next) {
+console.log("View Student Details")
+router.post('/', isLoggedIn, async function (req, res, next) {
     //employer validation
     if (req.userData["role"] == 4) {
 
@@ -26,15 +26,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const uid = await conn.query(`SELECT Employer_ID FROM user WHERE User_ID = ${pool.escape(req.userData["id"])}`)
-
-            const uids = uid[0]["Employer_ID"]
-
-            const mresult = await conn.query(`SELECT a.Application_ID, l.Title, l.Description, s.First_Name, s.Last_Name, s.Email, a.Student_ID, s.Murdoch_Student_ID, a.Status
-            FROM application a, listing l, student s
-            WHERE a.Listing_ID = l.Listing_ID 
-            AND a.Student_ID = s.Student_ID 
-            AND a.Status != "Cancelled" AND l.Employer_ID = ${pool.escape(uids)}`)
+            const mresult = await conn.query(`SELECT * FROM student WHERE Student_ID = ${pool.escape(req.body.studentId)}`)
 
             console.log(util.inspect(mresult))
 

@@ -30,14 +30,14 @@ class _TestimonialRowState extends State<TestimonialRow> {
   bool _sortAscending = true;
 
   String query = "";
-  List<StdTestimonialList> testimonial = [];
+  List<EmpTestimonialList> testimonial = [];
   int totalRow = 0;
   String role = "";
 
   //getdata
   Future<void> getData() async {
     role = await localstorage.getRole();
-    final results = await fetchStdTestimonialList(http.Client());
+    final results = await fetchEmpTestimonialList(http.Client());
     if (!isLoaded) {
       setState(() {
         _testimonialTableSource = TestimonialTableSource(results);
@@ -49,18 +49,20 @@ class _TestimonialRowState extends State<TestimonialRow> {
 
   Widget buildSearch() => SearchWidget(
         text: query,
-        hintText: 'Company Name, Comment',
+        hintText: 'Student Name, Comment',
         onChanged: searchPurchase,
       );
 
   Future<void> searchPurchase(String query) async {
-    final results = await fetchStdTestimonialList(http.Client());
+    final results = await fetchEmpTestimonialList(http.Client());
     final testimonial = results.where((testimonialDetails) {
-      final companyNameLower = testimonialDetails.companyName.toLowerCase();
+      final firstNameLower = testimonialDetails.firstName.toLowerCase();
+      final lastNameLower = testimonialDetails.lastName.toLowerCase();
       final commentLower = testimonialDetails.comment.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return companyNameLower.contains(searchLower) ||
+      return firstNameLower.contains(searchLower) ||
+          lastNameLower.contains(searchLower) ||
           commentLower.contains(searchLower);
     }).toList();
 

@@ -20,20 +20,20 @@ List<TestimonialList> parseTestimonialList(String responseBody) {
   return _stdTestimonialList;
 }
 
-Future<List<TestimonialList>> fetchTestimonialList(http.Client client) async {
-  var url = "$SERVER_IP/api/student/view-own-testimonial";
+Future<List<TestimonialList>> fetchTestimonial(String studentId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
-  final response = await client.get(Uri.parse(url), headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
-  });
+  final response = await http.post(
+    Uri.parse("$SERVER_IP/api/employer/view-testimonial-of-student"),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    },
+    body: jsonEncode(<String, String>{
+      'studentId': studentId,
+    }),
+  );
 
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
@@ -44,7 +44,7 @@ Future<List<TestimonialList>> fetchTestimonialList(http.Client client) async {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception(
-        'Failed to load testimonial List ${response.statusCode.toString()}');
+        'Failed to load Testimonial Details ${response.statusCode.toString()}');
   }
 }
 

@@ -151,6 +151,7 @@ class ApplicationList {
   String? email;
   String? murdochId;
   String? status;
+  int? studentId;
 
   ApplicationList(
       {this.applicationId,
@@ -160,17 +161,18 @@ class ApplicationList {
       this.lastName,
       this.email,
       this.murdochId,
-      this.status});
+      this.status,
+      this.studentId});
 
   factory ApplicationList.fromJson(Map<String, dynamic> json) =>
       ApplicationList(
-        applicationId: json["Application_ID"] as int,
-        title: json["Title"] as String,
-        description: json["Description"] as String,
-        firstName: json["First_Name"] as String,
-        lastName: json["Last_Name"] as String,
-        email: json["Email"] as String,
-        murdochId: json["Murdoch_Student_ID"] as String,
-        status: json["Status"] as String,
-      );
+          applicationId: json["Application_ID"] as int,
+          title: json["Title"] as String,
+          description: json["Description"] as String,
+          firstName: json["First_Name"] as String,
+          lastName: json["Last_Name"] as String,
+          email: json["Email"] as String,
+          murdochId: json["Murdoch_Student_ID"] as String,
+          status: json["Status"] as String,
+          studentId: json["Student_ID"] as int);
 }

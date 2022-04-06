@@ -2,13 +2,21 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-//import 'package:my_app/Screens/Student/Testimonial/getStdTestimonial.dart';
-import 'package:my_app/Util/color.dart';
+import 'package:intl/intl.dart';
+import 'package:my_app/Screens/Student/CompanyTestimonial/getTestimonial.dart';
 
-//employer write to student
 class TestimonialCardTile extends StatelessWidget {
-  var testimonial;
+  TestimonialList testimonial;
   TestimonialCardTile({Key? key, required this.testimonial}) : super(key: key);
+
+  String formatDisplayDate(String date) {
+    if (date != "") {
+      date = DateFormat("dd MMM yyyy").format(DateTime.parse(date)).toString();
+    } else {
+      date = "";
+    }
+    return date;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,7 @@ class TestimonialCardTile extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Stack(children: <Widget>[
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.center,
                 child: Stack(
                   children: <Widget>[
                     Padding(
@@ -38,14 +46,18 @@ class TestimonialCardTile extends StatelessWidget {
                           Image.memory(image, fit: BoxFit.fitHeight, scale: 2),
                           const SizedBox(height: 10),
                           Text(
-                            testimonial.companyName.toUpperCase(),
+                            testimonial.companyName!.toUpperCase(),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text(testimonial.comment),
+                          Text(testimonial.comment!),
+                          const SizedBox(height: 10),
+                          Text("Written on:" +
+                              formatDisplayDate(
+                                  testimonial.createdOn!.toString())),
                         ],
                       ),
                     )

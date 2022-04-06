@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/Screens/Student/CompanyTestimonial/view.dart';
 import 'package:my_app/Screens/Student/Listing/getListing.dart';
 import 'package:my_app/Screens/Student/Listing/view.dart';
 import 'package:my_app/Util/color.dart';
@@ -117,6 +118,22 @@ class CardTile extends StatelessWidget {
                                     },
                                   ),
                                   visible: !getBool(list.applied!),
+                                ),
+                                TextButton(
+                                  child:
+                                      const Text('View Company Testimonials'),
+                                  onPressed: () async {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return ViewComTestimonial(
+                                              employerId:
+                                                  list.employerId!.toString());
+                                        },
+                                      ),
+                                    );
+                                  },
                                 ),
                                 const SizedBox(width: 8),
                               ],

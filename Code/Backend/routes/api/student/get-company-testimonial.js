@@ -6,10 +6,10 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Own Listing Applications")
-router.get('/', isLoggedIn, async function (req, res, next) {
+console.log("View Company Testimonials")
+router.post('/', isLoggedIn, async function (req, res, next) {
     //employer validation
-    if (req.userData["role"] == 4) {
+    if (req.userData["role"] == 3) {
 
         //Get connection from pool
         const conn = await connection();
@@ -26,15 +26,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const uid = await conn.query(`SELECT Employer_ID FROM user WHERE User_ID = ${pool.escape(req.userData["id"])}`)
-
-            const uids = uid[0]["Employer_ID"]
-
-            const mresult = await conn.query(`SELECT a.Application_ID, l.Title, l.Description, s.First_Name, s.Last_Name, s.Email, a.Student_ID, s.Murdoch_Student_ID, a.Status
-            FROM application a, listing l, student s
-            WHERE a.Listing_ID = l.Listing_ID 
-            AND a.Student_ID = s.Student_ID 
-            AND a.Status != "Cancelled" AND l.Employer_ID = ${pool.escape(uids)}`)
+            const mresult = await conn.query(`select st.Application_ID, st.Student_Testimonial_ID, st.Created_On, st.Comment, st.File, s.First_Name as Student_First_Name, s.Last_Name as Student_Last_Name, e.* from student_testimonial st, student s, employer e WHERE st.Created_By = s.Student_ID AND st.Employer_ID = e.Employer_ID AND st.Employer_ID = ${pool.escape(req.body.employerId)} AND st.Status = "Approved"`)
 
             console.log(util.inspect(mresult))
 

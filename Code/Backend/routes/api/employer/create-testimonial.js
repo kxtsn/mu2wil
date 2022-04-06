@@ -35,11 +35,16 @@ router.post('/', isLoggedIn, async function (req, res, next) {
 
             const eid = await conn.query(`SELECT Employer_ID FROM listing WHERE Listing_ID = ${pool.escape(lids)}`)
 
-            const eids = eid[0]["Student_ID"]
+            const eids = eid[0]["Employer_ID"]
 
-            const mresult = await conn.query(`INSERT INTO employer_testimonial (Application_ID, Created_By, Created_On, Student_ID, Comment, File, Status) values(${pool.escape(req.body.applicationId)}, ${pool.escape(eids)}, now(), ${pool.escape(sids)}, ${pool.escape(req.body.comment)}, ${pool.escape(req.body.blob)}, 'Pending')`)
+            const buf = Buffer.from(req.body.blob);
+            console.log(buf)
 
-            console.log(mresult)
+            console.log("HII")
+            
+            const mresult = await conn.query(`INSERT INTO employer_testimonial (Application_ID, Created_By, Created_On, Student_ID, Comment, File, Status) VALUES (${pool.escape(req.body.applicationId)}, ${pool.escape(eids)},  now(), ${pool.escape(sids)}, ${pool.escape(req.body.comment)}, ${pool.escape(buf)}, "Pending")`)
+            console.log("hi2")
+
 
             await conn.query("COMMIT");
 

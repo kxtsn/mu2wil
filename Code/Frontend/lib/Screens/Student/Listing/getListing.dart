@@ -85,6 +85,7 @@ class ListingList {
   String? closingDate;
   String? status;
   String? applied;
+  int? employerId;
 
   ListingList(
       {this.listingId,
@@ -93,7 +94,8 @@ class ListingList {
       this.applicants,
       this.closingDate,
       this.status,
-      this.applied});
+      this.applied,
+      this.employerId});
 
   factory ListingList.fromJson(Map<String, dynamic> json) => ListingList(
       listingId: json["Listing_ID"] as int,
@@ -102,5 +104,6 @@ class ListingList {
       applicants: json["Applicants"] as int,
       closingDate: json["Closing_Date"] as String,
       status: json["Status"] as String,
-      applied: json["Applied"] as String);
+      applied: json["Applied"] as String,
+      employerId: json["Employer_ID"] as int);
 }

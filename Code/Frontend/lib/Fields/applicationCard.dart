@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Fields/empTestimonialPopUp.dart';
 import 'package:my_app/Screens/Employer/Application/getApplication.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_app/Screens/Employer/Application/view.dart';
+import 'package:my_app/Screens/Employer/StudentProfile/view.dart';
 import 'package:my_app/Util/color.dart';
 
 class CardTile extends StatelessWidget {
@@ -180,20 +182,31 @@ class CardTile extends StatelessWidget {
                                   child: TextButton(
                                     child: const Text('WRITE TESTIMONIAL'),
                                     onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) {
-                                      //       return ViewApplication();
-                                      //     },
-                                      //   ),
-                                      // );
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              TestimonialPopUp(context,
+                                                  listing: applicant));
                                     },
                                   ),
                                   visible:
                                       getWriteTestimonial(applicant.status!),
                                 ),
                                 const SizedBox(width: 8),
+                                TextButton(
+                                  child: const Text('VIEW PROFILE'),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return ViewStudentProfile(
+                                              studentId: applicant.studentId);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ],

@@ -4,6 +4,7 @@ console.log("In api/employer")
 
 router.use('/register-employer', require('./register-employer'));
 router.use('/get-company-detail', require('./get-company-detail'));
+router.use('/get-student-detail', require('./get-student-detail'));
 
 //application
 router.use('/view-student-application', require('./view-student-application'));
@@ -24,6 +25,8 @@ router.use('/view-written-testimonial', require('./view-written-testimonial'));
 router.use('/create-testimonial', require('./create-testimonial'));
 router.use('/delete-testimonial', require('./delete-testimonial'));
 router.use('/edit-testimonial', require('./edit-testimonial'));
+router.use('/view-testimonial-of-student', require('./view-testimonial-of-student'));
+
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

@@ -5,24 +5,24 @@ import 'dart:typed_data';
 
 import 'package:intl/intl.dart';
 import 'package:my_app/Fields/popUp.dart';
-import 'package:my_app/Screens/Student/Testimonial/view.dart';
+import 'package:my_app/Screens/Employer/Testimonial/view.dart';
 import 'package:my_app/Util/color.dart';
 import 'getWrittenTestimonial.dart';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class TestimonialTableSource extends DataTableSource {
-  final List<StdTestimonialList> testimonialLists;
+  final List<EmpTestimonialList> testimonialLists;
   TestimonialTableSource(this.testimonialLists);
 
-  List<StdTestimonialList> selectedList = [];
+  List<EmpTestimonialList> selectedList = [];
   late BuildContext _context;
 
   void getContext(BuildContext context) {
     _context = context;
   }
 
-  List<StdTestimonialList>? getSelected() {
+  List<EmpTestimonialList>? getSelected() {
     if (selectedList.isNotEmpty) {
       return selectedList;
     }
@@ -38,10 +38,10 @@ class TestimonialTableSource extends DataTableSource {
     return date;
   }
 
-  void _sort<T>(Comparable<T> getField(StdTestimonialList d), bool ascending) {
-    testimonialLists.sort((StdTestimonialList a, StdTestimonialList b) {
+  void _sort<T>(Comparable<T> getField(EmpTestimonialList d), bool ascending) {
+    testimonialLists.sort((EmpTestimonialList a, EmpTestimonialList b) {
       if (!ascending) {
-        final StdTestimonialList c = a;
+        final EmpTestimonialList c = a;
         a = b;
         b = c;
       }
@@ -54,7 +54,7 @@ class TestimonialTableSource extends DataTableSource {
 
   int _selectedCount = 0;
 
-  Widget getEdit(StdTestimonialList testimonial) {
+  Widget getEdit(EmpTestimonialList testimonial) {
     if (testimonial.status == "Pending") {
       return MouseRegion(
           cursor: SystemMouseCursors.click,
@@ -67,7 +67,7 @@ class TestimonialTableSource extends DataTableSource {
     }
   }
 
-  Widget getDelete(StdTestimonialList testimonial) {
+  Widget getDelete(EmpTestimonialList testimonial) {
     if (testimonial.status == "Pending" || testimonial.status == "Approved") {
       return MouseRegion(
           cursor: SystemMouseCursors.click,
@@ -114,7 +114,7 @@ class TestimonialTableSource extends DataTableSource {
   DataRow? getRow(int index) {
     assert(index >= 0);
     if (index >= testimonialLists.length) return null;
-    final StdTestimonialList testimonialList = testimonialLists[index];
+    final EmpTestimonialList testimonialList = testimonialLists[index];
     List<int> pictureData = testimonialList.image.cast<int>();
     Uint8List pictureBytes = Uint8List.fromList(pictureData);
     String pictureBase64 = String.fromCharCodes(pictureBytes);
@@ -141,7 +141,7 @@ class TestimonialTableSource extends DataTableSource {
   int get selectedRowCount => _selectedCount;
 
   void selectAll(bool? checked) {
-    for (StdTestimonialList result in testimonialLists) {
+    for (EmpTestimonialList result in testimonialLists) {
       result.selected = checked!;
     }
     _selectedCount = checked! ? testimonialLists.length : 0;
