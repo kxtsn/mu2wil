@@ -43,39 +43,6 @@ Future<List<ListingList>> fetchListingDetails(http.Client client) async {
   }
 }
 
-Future checkIfApplied(String listingId) async {
-  String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
-
-  final response = await http.post(
-    Uri.parse("$SERVER_IP/api/student/check-student-application"),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
-    },
-    body: jsonEncode(<String, String>{
-      'listingId': listingId,
-    }),
-  );
-
-  //print(message);
-  if (response.statusCode == 201) {
-    Map<String, dynamic> map = jsonDecode(response.body);
-    bool check = map['result'];
-    print("bool: " + check.toString());
-    return check;
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception(
-        'Fail to check application. ${response.statusCode.toString()}');
-  }
-}
-
 Future createApplication(String listingId) async {
   String? token;
   if (kIsWeb) {

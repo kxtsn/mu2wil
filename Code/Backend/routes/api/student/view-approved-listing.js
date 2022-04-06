@@ -26,7 +26,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const mresult = await conn.query(`SELECT * FROM listing WHERE Status = 'Approved'`)
+            const mresult = await conn.query(`SELECT l.*, (SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID AND a.Status != "Failed" AND a.Status != "Cancelled") as Applicants, CASE WHEN ((SELECT Count(*) FROM application a WHERE a.Listing_ID = l.Listing_ID AND a.Student_ID = 1 AND a.Status != "Cancelled" AND a.Status != "Failed") > 0 ) THEN "true" ELSE "false" END AS Applied FROM listing l WHERE l.Status = 'Approved'`)
 
             console.log(util.inspect(mresult))
 

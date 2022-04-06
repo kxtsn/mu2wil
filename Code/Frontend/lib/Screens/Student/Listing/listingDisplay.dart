@@ -70,14 +70,6 @@ class _ListingDisplayState extends State<ListingDisplay> {
     });
   }
 
-  Future<void> getApplicationStatus(String listingId) async {
-    final flag = await checkIfApplied(listingId);
-
-    setState(() {
-      notApplied = flag;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
