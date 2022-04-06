@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:my_app/Fields/testimonialPopUp.dart';
 import 'package:my_app/Screens/Student/Profile/view.dart';
 import 'package:my_app/Screens/Student/Application/getApplication.dart';
 import 'package:my_app/Util/color.dart';
@@ -131,14 +132,11 @@ class CardTile extends StatelessWidget {
                                   child: TextButton(
                                     child: const Text('WRITE TESTIMONIAL'),
                                     onPressed: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) {
-                                      //       return ViewApplication();
-                                      //     },
-                                      //   ),
-                                      // );
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              TestimonialPopUp(context,
+                                                  listing: applicant));
                                     },
                                   ),
                                   visible: getTestFlag(applicant.status!),

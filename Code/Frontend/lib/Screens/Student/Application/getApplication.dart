@@ -79,42 +79,9 @@ Future cancelApplication(String applicationId) async {
   }
 }
 
-Future createApplication(String listingId) async {
-  String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
-
-  final response = await http.post(
-    Uri.parse("$SERVER_IP/api/student/create-application"),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
-    },
-    body: jsonEncode(<String, String>{
-      'listingId': listingId,
-    }),
-  );
-
-  var message = jsonDecode(response.body);
-  //print(message);
-  if (response.statusCode == 201) {
-    print("commited successful");
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return message;
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception(
-        'Failed to create application. ${response.statusCode.toString()}');
-  }
-}
-
 class ApplicationList {
   int? applicationId;
+  int? listingId;
   String? title;
   String? description;
   int? applicants;
@@ -124,6 +91,7 @@ class ApplicationList {
 
   ApplicationList(
       {this.applicationId,
+      this.listingId,
       this.title,
       this.description,
       this.applicants,
@@ -134,6 +102,7 @@ class ApplicationList {
   factory ApplicationList.fromJson(Map<String, dynamic> json) =>
       ApplicationList(
         applicationId: json["Application_ID"] as int,
+        listingId: json["Listing_ID"] as int,
         title: json["Title"] as String,
         description: json["Description"] as String,
         applicants: json["Applicants"] as int,

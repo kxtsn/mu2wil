@@ -30,7 +30,7 @@ router.get('/', isLoggedIn, async function (req, res, next) {
 
             const uids = uid[0]["Student_ID"]
 
-            const mresult = await conn.query(`SELECT a.Application_ID, a.Status, l.Title, l.Description, l.Closing_Date, l.Status as Listing_Status, (SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID AND a.Status != "Failed" AND a.Status != "Cancelled") as Applicants 
+            const mresult = await conn.query(`SELECT a.Application_ID, a.Listing_ID, a.Status, l.Title, l.Description, l.Closing_Date, l.Status as Listing_Status, (SELECT COUNT(*) FROM application a WHERE a.Listing_ID = l.Listing_ID AND a.Status != "Failed" AND a.Status != "Cancelled") as Applicants 
             FROM listing l, application a WHERE l.Listing_ID = a.Listing_ID AND a.Student_ID = ${pool.escape(uids)}`)
 
             console.log(util.inspect(mresult))

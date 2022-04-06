@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:my_app/Screens/Student/Listing/view.dart';
 import 'package:my_app/Screens/Student/Profile/view.dart';
+import 'package:my_app/Screens/Student/Testimonial/view.dart';
 import 'package:my_app/Util/color.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -69,14 +70,14 @@ class MenuDrawer extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return ViewTestimonial();
-                  //     },
-                  //   ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ViewTestimonial();
+                      },
+                    ),
+                  );
                 },
                 child: const Text(
                   'Testimonials',

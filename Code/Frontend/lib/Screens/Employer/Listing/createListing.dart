@@ -133,17 +133,19 @@ class _AddListingListState extends State<AddListing> {
                                       ? 'field must be filled'
                                       : null,
                                 ),
-                                RoundedInputField(
+                                TextField(
                                   keyboardType: TextInputType.multiline,
-                                  textController: _descriptionTextController,
-                                  widthSize: changingWidth,
-                                  hintText: "Description",
+                                  controller: _descriptionTextController,
+                                  // widthSize: changingWidth,
+                                  decoration: InputDecoration(
+                                    hintText: "Description",
+                                    errorText: _filledDescription
+                                        ? 'field must be filled'
+                                        : null,
+                                  ),
                                   onChanged: (value) {
                                     description = value;
                                   },
-                                  errorText: _filledDescription
-                                      ? 'field must be filled'
-                                      : null,
                                 ),
                                 //set validation on field
                                 RoundedInputField(

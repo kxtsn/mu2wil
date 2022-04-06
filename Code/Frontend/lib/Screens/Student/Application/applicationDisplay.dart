@@ -59,7 +59,7 @@ class _ApplicationDisplayState extends State<ApplicationDisplay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: (MediaQuery.of(context).size.width),
+      width: (MediaQuery.of(context).size.width / 1.5),
       height: 500,
       child: ListView.builder(
           scrollDirection: Axis.vertical,

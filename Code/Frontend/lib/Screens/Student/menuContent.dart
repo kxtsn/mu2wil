@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:my_app/Screens/Student/Listing/view.dart';
 import 'package:my_app/Screens/Student/Profile/view.dart';
+import 'package:my_app/Screens/Student/Testimonial/view.dart';
 import 'package:my_app/Util/color.dart';
 
 class TopBarContents extends StatefulWidget {
@@ -146,14 +147,14 @@ class _TopBarContentsState extends State<TopBarContents> {
                         });
                       },
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) {
-                        //       return ViewTestimonial();
-                        //     },
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ViewTestimonial();
+                            },
+                          ),
+                        );
                       },
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

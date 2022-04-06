@@ -4,6 +4,7 @@ import 'package:my_app/Screens/Student/Application/applicationDisplay.dart';
 import 'package:my_app/Screens/Student/Profile/getStudentProfile.dart';
 import 'package:my_app/Screens/Student/Profile/profileCard.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/Screens/Student/Testimonial/testimonialCarousel.dart';
 import 'package:my_app/Util/color.dart';
 
 class DashBoard extends StatefulWidget {
@@ -61,9 +62,17 @@ class _DashBoardState extends State<DashBoard> {
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Expanded(
                   flex: 2,
-                  child: StudentDetailCards(
-                    studentList: studentList,
-                  )),
+                  child: Column(children: [
+                    StudentDetailCards(
+                      studentList: studentList,
+                    ),
+                    const SizedBox(height: 15),
+                    Header(
+                      title: 'Testimonial(s) Received',
+                    ),
+                    const SizedBox(height: 5),
+                    TestimonialCarousel()
+                  ])),
               const SizedBox(width: 20),
               Expanded(flex: 4, child: ApplicationDisplay()),
             ]),
