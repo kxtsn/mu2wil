@@ -1,11 +1,11 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const util = require("util"); 
 
 const pool  = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'mu2wil',
+  database: 'mu2wil2',
   insecureAuth: true,
   timezone: 'Z',
   supportBigNumbers: true,
