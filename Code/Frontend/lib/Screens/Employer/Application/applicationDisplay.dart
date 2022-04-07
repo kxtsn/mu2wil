@@ -1,21 +1,13 @@
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, must_be_immutable
-import 'dart:ui';
+// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, must_be_immutable, prefer_typing_uninitialized_variables, sized_box_for_whitespace
 
 import 'package:my_app/Fields/applicationCard.dart';
-import 'package:my_app/Fields/popUp.dart';
-import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Screens/Employer/Application/getApplication.dart';
-import 'package:my_app/Screens/Employer/Listing/view.dart';
-import 'package:my_app/main.dart';
-import 'package:my_app/util/color.dart';
-import 'package:my_app/util/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
 // import 'getListing.dart';
 // import 'listingTableSource.dart';
-import 'package:my_app/Fields/search.dart';
 
 class ApplicationDisplay extends StatefulWidget {
   var listing;
@@ -32,8 +24,6 @@ class ApplicationDisplay extends StatefulWidget {
 class _ApplicationDisplayState extends State<ApplicationDisplay> {
   //ListingTableSource _listingTableSource = ListingTableSource([]);
   bool isLoaded = false;
-  int? _sortColumnIndex;
-  bool _sortAscending = true;
 
   String query = "";
   List<ApplicationList> applicantLists = [];

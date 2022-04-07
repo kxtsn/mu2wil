@@ -1,7 +1,6 @@
-// ignore_for_file: file_names
-
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../main.dart';
@@ -16,21 +15,25 @@ List<CompanyList> parseCompanyDetails(String responseBody) {
   return _companyDetails;
 }
 
-Future<List<CompanyList>> fetchCompanyDetails(http.Client client) async {
-  var url = "$SERVER_IP/api/employer/get-company-detail";
+Future<List<CompanyList>> fetchCompanyDetails(String employerId) async {
   String? token;
   token = await localstorage.getToken();
 
-  final response = await client.get(Uri.parse(url), headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
-  });
+  final response = await http.post(
+    Uri.parse("$SERVER_IP/api/student/get-company-detail"),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer $token',
+    },
+    body: jsonEncode(<String, String>{
+      'employerId': employerId,
+    }),
+  );
 
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    // print(response.body);
+    //print(response.body);
     return parseCompanyDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,

@@ -21,11 +21,7 @@ Future<List<ApplicationList>> fetchApplicationDetails(
     http.Client client) async {
   var url = "$SERVER_IP/api/student/view-own-application";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -36,7 +32,7 @@ Future<List<ApplicationList>> fetchApplicationDetails(
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseApplicantDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -48,11 +44,7 @@ Future<List<ApplicationList>> fetchApplicationDetails(
 
 Future cancelApplication(String applicationId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/student/cancel-application"),
@@ -68,7 +60,7 @@ Future cancelApplication(String applicationId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -83,11 +75,7 @@ Future cancelApplication(String applicationId) async {
 Future createTestimonial(
     String applicationId, String comment, String file) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/student/create-testimonial"),
@@ -105,7 +93,7 @@ Future createTestimonial(
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

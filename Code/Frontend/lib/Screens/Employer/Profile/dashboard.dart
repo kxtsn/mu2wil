@@ -4,7 +4,6 @@ import 'package:my_app/Screens/Employer/Listing/createListing.dart';
 import 'package:my_app/Screens/Employer/Profile/getCompanyProfile.dart';
 import 'package:my_app/Screens/Employer/Profile/profileCard.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/Util/color.dart';
 
 import 'listingRow.dart';
 

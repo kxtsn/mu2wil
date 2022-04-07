@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -46,18 +48,18 @@ class TestimonialCardTile extends StatelessWidget {
                           Image.memory(image, fit: BoxFit.fitHeight, scale: 2),
                           const SizedBox(height: 10),
                           Text(
-                            testimonial.companyName!.toUpperCase(),
+                            testimonial.companyName.toUpperCase(),
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Text(testimonial.comment!),
+                          Text(testimonial.comment),
                           const SizedBox(height: 10),
                           Text("Written on:" +
                               formatDisplayDate(
-                                  testimonial.createdOn!.toString())),
+                                  testimonial.createdOn.toString())),
                         ],
                       ),
                     )

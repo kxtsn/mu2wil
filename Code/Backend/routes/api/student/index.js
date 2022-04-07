@@ -13,6 +13,7 @@ router.use('/create-application', require('./create-application'));
 router.use('/cancel-application', require('./cancel-application'));
 router.use('/get-student-detail', require('./get-student-detail'));
 router.use('/get-company-testimonial', require('./get-company-testimonial'));
+router.use('/get-company-detail', require('./get-company-detail'));
 
 router.use(function(err, req, res, next){
   if(err.name === 'ValidationError'){

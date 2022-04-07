@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:my_app/Screens/Employer/Application/view.dart';
 import 'package:my_app/Screens/Employer/Listing/view.dart';
@@ -7,7 +9,7 @@ import 'package:my_app/Screens/LoginModule/Login/login.dart';
 import 'package:my_app/Util/color.dart';
 
 class TopBarContents extends StatefulWidget {
-  TopBarContents();
+  const TopBarContents();
 
   @override
   _TopBarContentsState createState() => _TopBarContentsState();
@@ -33,7 +35,7 @@ class _TopBarContentsState extends State<TopBarContents> {
     return Container(
         color: offWhiteColor.withOpacity(0.5),
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

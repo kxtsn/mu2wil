@@ -32,7 +32,7 @@ router.post('/', isLoggedIn, async function (req, res, next) {
 
             console.log("hello")
 
-            const mresult = await conn.query(`SELECT a.Application_ID, l.Title, l.Description, s.First_Name, s.Last_Name, s.Email, s.Murdoch_Student_ID, a.Status
+            const mresult = await conn.query(`SELECT a.Application_ID, l.Title, l.Description, s.First_Name, s.Last_Name, s.Email, s.Murdoch_Student_ID, s.Student_ID, a.Status
             FROM application a, listing l, student s
             WHERE a.Listing_ID = l.Listing_ID 
             AND a.Student_ID = s.Student_ID 

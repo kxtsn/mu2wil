@@ -20,13 +20,9 @@ List<TestimonialList> parseTestimonialList(String responseBody) {
   return _stdTestimonialList;
 }
 
-Future getTestimonialById(String employerId) async {
+Future<List<TestimonialList>> fetchTestimonial(String employerId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/student/get-company-testimonial"),
@@ -39,88 +35,59 @@ Future getTestimonialById(String employerId) async {
     }),
   );
 
-  //var message = jsonDecode(response.body);
-  //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
-    // If the server did return a 201 CREATED response,
+    // If the server did return a 201 OK response,
     // then parse the JSON.
+    //print(response.body);
     return parseTestimonialList(response.body);
   } else {
-    // If the server did not return a 201 CREATED response,
+    // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception(
-        'Failed to load profile. ${response.statusCode.toString()}');
+        'Failed to load Testimonial Details ${response.statusCode.toString()}');
   }
 }
 
 class TestimonialList {
-  int? testimonialId;
-  int? applicationId;
-  int? employerId;
-  String? companyName;
-  String? firstName;
-  String? lastName;
-  String? createdOn;
-  String? comment;
-  dynamic image;
-  String? studentFirstName;
-  String? studentLastName;
-  String? email;
-  String? telephone;
-  String? contact;
-  String? website;
-  String? country;
-  String? address1;
-  String? address2;
-  String? postal;
-  String? companyCode;
+  final int testimonialId;
+  final int applicationId;
+  final int createdBy;
+  final int employerId;
+  final String companyName;
+  final String firstName;
+  final String lastName;
+  final String createdOn;
+  final String comment;
+  final dynamic image;
+  final String status;
 
   TestimonialList(
-      {this.testimonialId,
-      this.applicationId,
-      this.employerId,
-      this.companyName,
-      this.studentFirstName,
-      this.studentLastName,
-      this.firstName,
-      this.lastName,
-      this.createdOn,
-      this.comment,
-      this.image,
-      this.email,
-      this.telephone,
-      this.contact,
-      this.website,
-      this.country,
-      this.address1,
-      this.address2,
-      this.postal,
-      this.companyCode});
+      {required this.testimonialId,
+      required this.applicationId,
+      required this.createdBy,
+      required this.employerId,
+      required this.companyName,
+      required this.firstName,
+      required this.lastName,
+      required this.createdOn,
+      required this.comment,
+      required this.image,
+      required this.status});
 
   bool selected = false;
 
   factory TestimonialList.fromJson(Map<dynamic, dynamic> json) {
     return TestimonialList(
-        testimonialId: json["Employer_Testimonial_ID"] as int?,
-        applicationId: json["Application_ID"] as int?,
-        employerId: json["Employer_ID"] as int?,
-        companyName: json["Company_Name"] as String?,
-        firstName: json["First_Name"] as String?,
-        lastName: json["Last_Name"] as String?,
-        studentFirstName: json["Student_First_Name"] as String?,
-        studentLastName: json["Student_Last_Name"] as String?,
-        createdOn: json["Created_On"] as String?,
-        comment: json["Comment"] as String?,
+        testimonialId: json["Employer_Testimonial_ID"] as int,
+        applicationId: json["Application_ID"] as int,
+        createdBy: json["Created_By"] as int,
+        employerId: json["Employer_ID"] as int,
+        companyName: json["Company_Name"] as String,
+        firstName: json["First_Name"] as String,
+        lastName: json["Last_Name"] as String,
+        createdOn: json["Created_On"] as String,
+        comment: json["Comment"] as String,
         image: json["File"]["data"],
-        email: json["Email"] as String?,
-        telephone: json["Telephone"] as String?,
-        contact: json["Contact_Number"] as String?,
-        website: json["Website"] as String?,
-        country: json["Country"] as String?,
-        address1: json["Address1"] as String?,
-        address2: json["Address2"] as String?,
-        postal: json["Postal_Code"] as String?,
-        companyCode: json["Company_Code"] as String?);
+        status: json["Status"] as String);
   }
 }

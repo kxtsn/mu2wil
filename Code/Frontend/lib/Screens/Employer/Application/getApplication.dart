@@ -1,6 +1,7 @@
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../main.dart';
@@ -20,11 +21,7 @@ Future<List<ApplicationList>> fetchApplicationDetails(
     http.Client client) async {
   var url = "$SERVER_IP/api/employer/view-student-application";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -35,7 +32,7 @@ Future<List<ApplicationList>> fetchApplicationDetails(
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseApplicantDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -64,7 +61,7 @@ Future<List<ApplicationList>> fetchApplicationDetailsByListing(
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseApplicantDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -76,11 +73,7 @@ Future<List<ApplicationList>> fetchApplicationDetailsByListing(
 
 Future rejectApplication(String applicationId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/reject-application"),
@@ -96,7 +89,7 @@ Future rejectApplication(String applicationId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -110,11 +103,7 @@ Future rejectApplication(String applicationId) async {
 
 Future acceptApplication(String applicationId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/accept-application"),
@@ -130,7 +119,7 @@ Future acceptApplication(String applicationId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:my_app/Fields/header.dart';
 import 'package:my_app/Screens/Employer/Application/applicationDisplay.dart';
-import 'package:my_app/Util/color.dart';
 
 //import 'ApplicationRow.dart';
 

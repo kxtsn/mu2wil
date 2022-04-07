@@ -23,11 +23,8 @@ List<TestimonialList> parseTestimonialList(String responseBody) {
 Future<List<TestimonialList>> fetchTestimonialList(http.Client client) async {
   var url = "$SERVER_IP/api/student/view-own-testimonial";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -38,7 +35,7 @@ Future<List<TestimonialList>> fetchTestimonialList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseTestimonialList(response.body);
   } else {
     // If the server did not return a 200 OK response,

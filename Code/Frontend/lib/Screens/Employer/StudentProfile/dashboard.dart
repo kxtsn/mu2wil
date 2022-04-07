@@ -17,6 +17,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+  bool _isLoadedProfile = false;
   bool _isLoaded = false;
   StudentProfile student = StudentProfile();
   List<TestimonialList> testimonialLists = [];
@@ -33,10 +34,10 @@ class _DashBoardState extends State<DashBoard> {
   //getdata
   Future<void> getProfileData() async {
     final results = await fetchStudentDetails(widget.studentId.toString());
-    if (!_isLoaded) {
+    if (!_isLoadedProfile) {
       setState(() {
         student = results[0];
-        _isLoaded = true;
+        _isLoadedProfile = true;
       });
     }
   }

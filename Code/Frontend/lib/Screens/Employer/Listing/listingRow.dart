@@ -30,7 +30,7 @@ class _ListingRowState extends State<ListingRow> {
   ListingTableSource _listingTableSource = ListingTableSource([]);
   bool isLoaded = false;
   int? _sortColumnIndex;
-  bool _sortAscending = true;
+  final bool _sortAscending = true;
 
   String query = "";
   List<ListingList> listings = [];

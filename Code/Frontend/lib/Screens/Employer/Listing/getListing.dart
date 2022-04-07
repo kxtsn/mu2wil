@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 
 import '../../../../main.dart';
 
@@ -22,11 +21,7 @@ List<ListingList> parseListingList(String responseBody) {
 Future<List<ListingList>> fetchListingList(http.Client client) async {
   var url = "$SERVER_IP/api/employer/view-own-listing";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -37,7 +32,7 @@ Future<List<ListingList>> fetchListingList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    // print(response.body);
     return parseListingList(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -49,11 +44,7 @@ Future<List<ListingList>> fetchListingList(http.Client client) async {
 
 Future commitClose(String listingId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/close-listing"),
@@ -69,7 +60,7 @@ Future commitClose(String listingId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -83,11 +74,7 @@ Future commitClose(String listingId) async {
 
 Future commitDelete(String listingId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/delete-listing"),
@@ -103,7 +90,7 @@ Future commitDelete(String listingId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

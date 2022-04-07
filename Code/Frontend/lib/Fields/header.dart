@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../main.dart';
 import '../../util/color.dart';
@@ -127,11 +126,7 @@ List<FirstName> parseFirstName(String responseBody) {
 Future<List<FirstName>> fetchFirstName(http.Client client) async {
   var url = "$SERVER_IP/api/util/get-first-name";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',

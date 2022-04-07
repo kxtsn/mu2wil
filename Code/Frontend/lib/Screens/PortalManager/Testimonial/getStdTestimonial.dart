@@ -26,11 +26,7 @@ Future<List<StdTestimonialList>> fetchStdTestimonialList(
     http.Client client) async {
   var url = "$SERVER_IP/api/portal-manager/view-all-student-testimonial";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -41,7 +37,7 @@ Future<List<StdTestimonialList>> fetchStdTestimonialList(
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseTestimonialList(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -53,11 +49,8 @@ Future<List<StdTestimonialList>> fetchStdTestimonialList(
 
 Future commitRejectStd(String testimonialId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/reject-student-testimonial"),
@@ -73,7 +66,7 @@ Future commitRejectStd(String testimonialId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -87,11 +80,8 @@ Future commitRejectStd(String testimonialId) async {
 
 Future commitApproveStd(String testimonialId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/approve-student-testimonial"),
@@ -107,7 +97,7 @@ Future commitApproveStd(String testimonialId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

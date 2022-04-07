@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, file_names
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_app/Fields/testimonialPopUp.dart';
@@ -64,7 +66,7 @@ class CardTile extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Column(
@@ -81,9 +83,9 @@ class CardTile extends StatelessWidget {
                                     Text(applicant.description!),
                                   ],
                                 ),
-                                const SizedBox(width: 32),
+                                // const SizedBox(width: 32),
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Text(

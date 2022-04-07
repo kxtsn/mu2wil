@@ -17,11 +17,7 @@ Future registerCompany(
     String country,
     String companyCode) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/register-employer"),

@@ -55,8 +55,8 @@ class _BodyState extends State<Body> {
       }),
     );
     Map<String, dynamic> responseMap = json.decode(res.body);
-    print("hi in response map");
-    print(responseMap);
+    //print("hi in response map");
+    //print(responseMap);
     if (res.statusCode == 200) {
       localstorage.setToken(responseMap['token']);
       localstorage.setRole(responseMap['role'].toString());
@@ -102,7 +102,7 @@ class _BodyState extends State<Body> {
             widthSize: 400,
             text: "LOGIN",
             press: () async {
-              print("hi in login");
+              //print("hi in login");
               setState(() {
                 _email.isEmpty ? _filledEmail = true : _filledEmail = false;
                 _password.isEmpty
@@ -117,9 +117,9 @@ class _BodyState extends State<Body> {
                 localstorage.setResponesKey(response);
 
                 role = await localstorage.getRole();
-                print("Hi role: " + role.toString());
+                //print("Hi role: " + role.toString());
                 if (role == "1") {
-                  print("Hello1");
+                  //print("Hello1");
                   Navigator.pushReplacementNamed(context, '/admin');
                 } else if (role == "2") {
                   Navigator.pushReplacementNamed(context, '/portalManager');

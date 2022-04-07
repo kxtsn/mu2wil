@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -13,11 +15,9 @@ class CardTile extends StatelessWidget {
   Widget getText(String applied) {
     if (applied == "true") {
       return const Text(
-        "Applied",
+        "APPLIED",
         style: TextStyle(
           color: greenColor,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
         ),
       );
     } else {
@@ -119,6 +119,7 @@ class CardTile extends StatelessWidget {
                                   ),
                                   visible: !getBool(list.applied!),
                                 ),
+                                const SizedBox(width: 10),
                                 TextButton(
                                   child:
                                       const Text('View Company Testimonials'),

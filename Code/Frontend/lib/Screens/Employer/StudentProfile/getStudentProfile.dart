@@ -33,7 +33,7 @@ Future<List<StudentProfile>> fetchStudentDetails(String studentId) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseStudentDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,

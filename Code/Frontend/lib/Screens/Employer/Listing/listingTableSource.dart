@@ -14,7 +14,6 @@ class ListingTableSource extends DataTableSource {
 
   List<ListingList> selectedList = [];
   late BuildContext _context;
-  bool _isPending = false;
 
   void getContext(BuildContext context) {
     _context = context;
@@ -34,20 +33,6 @@ class ListingTableSource extends DataTableSource {
       date = "";
     }
     return date;
-  }
-
-  void _sort<T>(Comparable<T> getField(ListingList d), bool ascending) {
-    listingLists.sort((ListingList a, ListingList b) {
-      if (!ascending) {
-        final ListingList c = a;
-        a = b;
-        b = c;
-      }
-      final Comparable<T> aValue = getField(a);
-      final Comparable<T> bValue = getField(b);
-      return Comparable.compare(aValue, bValue);
-    });
-    notifyListeners();
   }
 
   int _selectedCount = 0;
@@ -114,9 +99,7 @@ class ListingTableSource extends DataTableSource {
     assert(index >= 0);
     if (index >= listingLists.length) return null;
     final ListingList listingList = listingLists[index];
-    if (listingList.status == "pending") {
-      _isPending = true;
-    }
+    if (listingList.status == "pending") {}
     return DataRow.byIndex(
         index: index,
         selected: listingList.selected,

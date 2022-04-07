@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:my_app/Screens/Employer/Application/dashboard.dart';
 import 'package:my_app/Util/color.dart';
@@ -15,13 +17,9 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _opacity = 0;
 
   _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
+    setState(() {});
   }
 
   @override
@@ -46,7 +44,7 @@ class _BodyState extends State<Body> {
                   width: 150),
             )
           : PreferredSize(
-              child: TopBarContents(),
+              child: const TopBarContents(),
               preferredSize: Size(screenSize.width, 70),
             ),
       drawer: const MenuDrawer(),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/Screens/Student/CompanyTestimonial/getCompanyProfile.dart';
 import 'package:my_app/Util/color.dart';
 
 class CompanyDetailCards extends StatefulWidget {
-  var companyLists;
-  CompanyDetailCards({Key? key, this.companyLists}) : super(key: key);
+  CompanyList companyList;
+  CompanyDetailCards({Key? key, required this.companyList}) : super(key: key);
 
   @override
   State<CompanyDetailCards> createState() => _CompanyDetailCardsState();
@@ -12,18 +13,18 @@ class CompanyDetailCards extends StatefulWidget {
 class _CompanyDetailCardsState extends State<CompanyDetailCards> {
   @override
   Widget build(BuildContext context) {
-    widget.companyLists[0].firstName ??= "";
-    widget.companyLists[0].lastName ??= "";
-    widget.companyLists[0].email ??= "";
-    widget.companyLists[0].contact ??= "";
-    widget.companyLists[0].companyName ??= "";
-    widget.companyLists[0].telephone ??= "";
-    widget.companyLists[0].website ??= "";
-    widget.companyLists[0].country ??= "";
-    widget.companyLists[0].address1 ??= "";
-    widget.companyLists[0].address2 ??= "";
-    widget.companyLists[0].postal ??= "";
-    widget.companyLists[0].companyCode ??= "";
+    widget.companyList.firstName ??= "";
+    widget.companyList.lastName ??= "";
+    widget.companyList.email ??= "";
+    widget.companyList.contact ??= "";
+    widget.companyList.companyName ??= "";
+    widget.companyList.telephone ??= "";
+    widget.companyList.website ??= "";
+    widget.companyList.country ??= "";
+    widget.companyList.address1 ??= "";
+    widget.companyList.address2 ??= "";
+    widget.companyList.postal ??= "";
+    widget.companyList.companyCode ??= "";
     return Container(
         child: Column(children: [
       const SizedBox(
@@ -43,23 +44,23 @@ class _CompanyDetailCardsState extends State<CompanyDetailCards> {
                 children: [
                   const Text("Company Name: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].companyName!),
+                  Text(widget.companyList.companyName!),
                   const SizedBox(height: 5),
                   const Text("Company Code: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].companyCode!),
+                  Text(widget.companyList.companyCode!),
                   const SizedBox(height: 5),
                   const Text("Country: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].country!),
+                  Text(widget.companyList.country!),
                   const SizedBox(height: 5),
                   const Text("Address: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].address1! +
+                  Text(widget.companyList.address1! +
                       "\n" +
-                      widget.companyLists[0].address2! +
+                      widget.companyList.address2! +
                       "\n" +
-                      widget.companyLists[0].postal!),
+                      widget.companyList.postal!),
                 ],
               ),
               const SizedBox(width: 20),
@@ -68,25 +69,25 @@ class _CompanyDetailCardsState extends State<CompanyDetailCards> {
                 children: [
                   const Text("Contact Person: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].firstName! +
+                  Text(widget.companyList.firstName! +
                       " " +
-                      widget.companyLists[0].lastName!),
+                      widget.companyList.lastName!),
                   const SizedBox(height: 5),
                   const Text("Email: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].email!),
+                  Text(widget.companyList.email!),
                   const SizedBox(height: 5),
                   const Text("Contact Number: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].contact!),
+                  Text(widget.companyList.contact!),
                   const SizedBox(height: 5),
                   const Text("Website: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].website ??= ""),
+                  Text(widget.companyList.website ??= ""),
                   const SizedBox(height: 5),
                   const Text("Telephone: ",
                       style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(widget.companyLists[0].telephone!),
+                  Text(widget.companyList.telephone!),
                 ],
               )
             ],

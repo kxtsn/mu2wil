@@ -1,7 +1,6 @@
-// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, non_constant_identifier_names, avoid_unnecessary_containers
 
 import 'package:intl/intl.dart';
-import 'package:my_app/Fields/header.dart';
 import 'package:my_app/Fields/popUp.dart';
 import 'package:my_app/Fields/roundedButton.dart';
 import 'package:my_app/Fields/roundedInputField.dart';
@@ -11,7 +10,6 @@ import 'package:my_app/Util/color.dart';
 import 'getListing.dart';
 import 'package:my_app/util/responsive.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class AddListing extends StatefulWidget {
@@ -120,7 +118,7 @@ class _AddListingListState extends State<AddListing> {
                                   height: 10,
                                 ),
                                 Text(text,
-                                    style: TextStyle(color: blackColor),
+                                    style: const TextStyle(color: blackColor),
                                     textAlign: TextAlign.left),
                                 SizedBox(height: size.height * 0.01),
                                 RoundedInputField(

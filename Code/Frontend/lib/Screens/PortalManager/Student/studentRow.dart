@@ -228,15 +228,12 @@ class _StudentRowState extends State<StudentRow> {
                         style: TextStyle(
                             color: primaryColor, fontWeight: FontWeight.bold),
                       )),
-                      DataColumn(
-                        label: Visibility(
-                            child: const Text(
-                              'Status',
-                              style: TextStyle(
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            visible: _isVisible),
+                      const DataColumn(
+                        label: Text(
+                          'Status',
+                          style: TextStyle(
+                              color: primaryColor, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                     source: _studentTableSource,

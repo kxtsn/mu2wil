@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/Fields/header.dart';
+import 'package:my_app/Screens/Student/CompanyTestimonial/getCompanyProfile.dart';
 import 'package:my_app/Screens/Student/CompanyTestimonial/profile.dart';
 import 'package:my_app/Screens/Student/CompanyTestimonial/testimonialCarousel.dart';
 import 'package:my_app/Util/color.dart';
@@ -14,20 +15,33 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
-  List<TestimonialList> testimonialLists = [];
+  bool _isLoadedProfile = false;
   bool _isLoaded = false;
+  CompanyList company = CompanyList();
+  List<TestimonialList> testimonialLists = [];
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      getData();
+      getProfileData();
+      getTestimonials();
     });
   }
 
   //getdata
-  Future<void> getData() async {
-    final results = await getTestimonialById(widget.employerId);
+  Future<void> getProfileData() async {
+    final results = await fetchCompanyDetails(widget.employerId.toString());
+    if (!_isLoadedProfile) {
+      setState(() {
+        company = results[0];
+        _isLoadedProfile = true;
+      });
+    }
+  }
+
+  Future<void> getTestimonials() async {
+    final results = await fetchTestimonial(widget.employerId.toString());
     if (!_isLoaded) {
       setState(() {
         testimonialLists = results;
@@ -60,8 +74,7 @@ class _DashBoardState extends State<DashBoard> {
                 ]),
             Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Expanded(
-                  flex: 3,
-                  child: CompanyDetailCards(companyLists: testimonialLists)),
+                  flex: 3, child: CompanyDetailCards(companyList: company)),
               const SizedBox(
                 width: 20,
               ),

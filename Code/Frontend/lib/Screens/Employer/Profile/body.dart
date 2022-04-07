@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
 import 'package:my_app/Util/color.dart';
 import 'package:my_app/Util/responsive.dart';
@@ -14,13 +16,9 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final ScrollController _scrollController = ScrollController();
-  double _scrollPosition = 0;
-  double _opacity = 0;
 
   _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
+    setState(() {});
   }
 
   @override
@@ -45,7 +43,7 @@ class _BodyState extends State<Body> {
                   width: 150),
             )
           : PreferredSize(
-              child: TopBarContents(),
+              child: const TopBarContents(),
               preferredSize: Size(screenSize.width, 70),
             ),
       drawer: const MenuDrawer(),

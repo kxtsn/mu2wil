@@ -110,10 +110,9 @@ class StudentTableSource extends DataTableSource {
           DataCell(Text((studentList.firstName).toString())),
           DataCell(Text((studentList.lastName).toString())),
           DataCell(Text((studentList.email).toString())),
-          DataCell(Visibility(
-            child: Text((studentList.status).toString()),
-            visible: isVisible,
-          )),
+          DataCell(
+            Text((studentList.status).toString()),
+          ),
         ]);
   }
 

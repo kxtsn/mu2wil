@@ -6,7 +6,7 @@ const { pool, connection, query } = require('../../../lib/database.js');
 const { isLoggedIn } = require('../../../middleware/uservalidation.js');
 const util = require('util');
 
-console.log("View Company Testimonials")
+console.log("View Testimonials by Company")
 router.post('/', isLoggedIn, async function (req, res, next) {
     //employer validation
     if (req.userData["role"] == 3) {
@@ -26,7 +26,7 @@ router.post('/', isLoggedIn, async function (req, res, next) {
             //Change status code for error
             statusCode = 501;
 
-            const mresult = await conn.query(`select st.Application_ID, st.Student_Testimonial_ID, st.Created_On, st.Comment, st.File, s.First_Name as Student_First_Name, s.Last_Name as Student_Last_Name, e.* from student_testimonial st, student s, employer e WHERE st.Created_By = s.Student_ID AND st.Employer_ID = e.Employer_ID AND st.Employer_ID = ${pool.escape(req.body.employerId)} AND st.Status = "Approved"`)
+            const mresult = await conn.query(`select st.*, s.First_Name, s.Last_Name, e.Company_Name from student_testimonial st, student s, employer e WHERE st.Created_By = s.Student_ID AND st.Employer_ID = e.Employer_ID AND st.Status = "Approved" AND st.Employer_ID = ${pool.escape(req.body.employerId)}`)
 
             console.log(util.inspect(mresult))
 

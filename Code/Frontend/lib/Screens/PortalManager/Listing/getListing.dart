@@ -22,11 +22,7 @@ List<ListingList> parseListingList(String responseBody) {
 Future<List<ListingList>> fetchListingList(http.Client client) async {
   var url = "$SERVER_IP/api/portal-manager/view-all-listing";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -37,7 +33,7 @@ Future<List<ListingList>> fetchListingList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseListingList(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -49,11 +45,7 @@ Future<List<ListingList>> fetchListingList(http.Client client) async {
 
 Future commitReject(String listingId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/reject-listing"),
@@ -69,7 +61,7 @@ Future commitReject(String listingId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -83,11 +75,7 @@ Future commitReject(String listingId) async {
 
 Future commitApprove(String listingId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/approve-listing"),
@@ -103,7 +91,7 @@ Future commitApprove(String listingId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

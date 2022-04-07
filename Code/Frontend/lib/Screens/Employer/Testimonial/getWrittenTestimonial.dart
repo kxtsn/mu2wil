@@ -24,11 +24,7 @@ Future<List<EmpTestimonialList>> fetchEmpTestimonialList(
     http.Client client) async {
   var url = "$SERVER_IP/api/employer/view-written-testimonial";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -39,7 +35,7 @@ Future<List<EmpTestimonialList>> fetchEmpTestimonialList(
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseTestimonialList(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -51,11 +47,7 @@ Future<List<EmpTestimonialList>> fetchEmpTestimonialList(
 
 Future commitDelete(String testimonialId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/delete-testimonial"),
@@ -86,11 +78,7 @@ Future commitDelete(String testimonialId) async {
 Future createTestimonial(
     String applicationId, String comment, String file) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/employer/create-testimonial"),
@@ -108,7 +96,7 @@ Future createTestimonial(
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;

@@ -18,11 +18,7 @@ List<StudentList> parseStudentDetails(String responseBody) {
 Future<List<StudentList>> fetchStudentDetails(http.Client client) async {
   var url = "$SERVER_IP/api/student/get-student-detail";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -33,7 +29,7 @@ Future<List<StudentList>> fetchStudentDetails(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseStudentDetails(response.body);
   } else {
     // If the server did not return a 200 OK response,

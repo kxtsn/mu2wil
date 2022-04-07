@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:my_app/Fields/popUp.dart';
-import 'package:my_app/Screens/SuperAdmin/Admin/view.dart';
 import 'package:my_app/Screens/SuperAdmin/PortalManager/view.dart';
 import 'package:my_app/util/color.dart';
 import 'getManager.dart';

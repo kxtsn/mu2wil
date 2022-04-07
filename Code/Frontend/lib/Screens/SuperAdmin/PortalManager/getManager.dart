@@ -22,11 +22,7 @@ List<ManagerList> parseManager(String responseBody) {
 Future<List<ManagerList>> fetchManagerList(http.Client client) async {
   var url = "$SERVER_IP/api/super-admin/view-all-portal-manager";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -37,7 +33,7 @@ Future<List<ManagerList>> fetchManagerList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    // print(response.body);
     return parseManager(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -49,11 +45,7 @@ Future<List<ManagerList>> fetchManagerList(http.Client client) async {
 
 Future commitDeleteManager(String managerId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/super-admin/delete-portal-manager"),
@@ -69,7 +61,7 @@ Future commitDeleteManager(String managerId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -87,11 +79,8 @@ Future commitNew(
   String email,
 ) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/super-admin/create-portal-manager"),
@@ -122,11 +111,8 @@ Future commitNew(
 
 Future commitCheck(String email) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/util/check-email-exist"),
@@ -152,11 +138,7 @@ Future commitCheck(String email) async {
 
 Future commitUpdate(String managerId, String firstName, String lastName) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/super-admin/update-portal-manager"),

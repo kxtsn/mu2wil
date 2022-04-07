@@ -22,11 +22,7 @@ List<StudentList> parseStudent(String responseBody) {
 Future<List<StudentList>> fetchSAStudentList(http.Client client) async {
   var url = "$SERVER_IP/api/super-admin/view-all-student";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -37,7 +33,7 @@ Future<List<StudentList>> fetchSAStudentList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseStudent(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -50,11 +46,7 @@ Future<List<StudentList>> fetchSAStudentList(http.Client client) async {
 Future<List<StudentList>> fetchStudentList(http.Client client) async {
   var url = "$SERVER_IP/api/portal-manager/view-all-student";
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await client.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
@@ -65,7 +57,7 @@ Future<List<StudentList>> fetchStudentList(http.Client client) async {
   if (response.statusCode == 201) {
     // If the server did return a 201 OK response,
     // then parse the JSON.
-    print(response.body);
+    //print(response.body);
     return parseStudent(response.body);
   } else {
     // If the server did not return a 200 OK response,
@@ -77,11 +69,7 @@ Future<List<StudentList>> fetchStudentList(http.Client client) async {
 
 Future commitDeleteStudent(String studentId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/delete-student"),
@@ -97,7 +85,7 @@ Future commitDeleteStudent(String studentId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -111,11 +99,7 @@ Future commitDeleteStudent(String studentId) async {
 
 Future commitGraduatedStudent(String studentId) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/update-graduate"),
@@ -131,7 +115,7 @@ Future commitGraduatedStudent(String studentId) async {
   var message = jsonDecode(response.body);
   //print(message);
   if (response.statusCode == 201) {
-    print("commited successful");
+    //print("commited successful");
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
     return message;
@@ -150,11 +134,7 @@ Future commitNew(
   String email,
 ) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/create-student"),
@@ -186,11 +166,7 @@ Future commitNew(
 
 Future commitCheck(String email) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/util/check-email-exist"),
@@ -217,11 +193,7 @@ Future commitCheck(String email) async {
 Future commitUpdate(String studentId, String murdochId, String firstName,
     String lastName) async {
   String? token;
-  if (kIsWeb) {
-    token = await localstorage.getToken();
-  } else {
-    token = await storage.getToken();
-  }
+  token = await localstorage.getToken();
 
   final response = await http.post(
     Uri.parse("$SERVER_IP/api/portal-manager/update-student"),
