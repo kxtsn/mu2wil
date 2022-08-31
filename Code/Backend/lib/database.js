@@ -4,8 +4,8 @@ const util = require("util");
 const pool  = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: '',
-  database: 'mu2wil2',
+  password: 'admin',
+  database: 'mu2wil',
   insecureAuth: true,
   timezone: 'Z',
   supportBigNumbers: true,
